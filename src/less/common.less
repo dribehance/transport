@@ -1,0 +1,109 @@
+body {
+	font-family: gothambook, "微软雅黑";
+}
+// layout
+.wrap {
+	position: relative;
+	width: 100%;
+	max-width: 640px;
+	padding:15px;
+	margin: auto auto;
+	.box-sizing(border-box);
+}
+.full-width {
+    width: 100%;
+    .box-sizing(border-box)
+}
+.clearfix {
+	.clearfix();
+}
+.text-small {
+    font-size: 12px;
+}
+.text-large {
+    font-size: 16px;
+}
+.text-big {
+	font-size: 36px;
+}
+.text-primary {
+    color: @brand-primary;
+}
+.text-success {
+    color: @brand-success;
+}
+.text-white {
+    color: white;
+}
+.hide {
+	display: none;
+}
+.block {
+	display: block;
+}
+.hidden {
+	display: none !important;
+}
+.pull-left {
+    float: left;
+}
+.pull-right {
+    float: right;
+}
+// text vs link
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.text-center {
+	text-align: center;
+}
+.link() {
+	text-decoration: none;
+	color: inherit;
+}
+.bg-gray-lighter {
+    background-color: @gray-lighter;
+}
+// 
+.section {
+    display: block;
+    margin:25px auto;
+    .clearfix();
+    .section-title {
+        margin-bottom: 15px;
+        font-size: 20px;
+        padding-left: 15px;
+        border-left: 3px solid @brand-primary; 
+    }
+    .section-header {
+        position: relative;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        font-size: 20px;
+        border-bottom: 3px solid #f1f1f1; 
+        color: @brand-primary;
+        &:before {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            height: 3px;
+            background-color: @brand-primary;
+            width: 50px;
+        }
+    }
+    .section-content {
+        line-height: 26px;
+    }
+    &.section-lg {
+        margin: 50px auto;
+    }
+}
+i.fa {
+    margin-right: 5px;
+}
+.has-bottom {
+    margin-bottom: 50px;
+}

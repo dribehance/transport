@@ -1,5 +1,5 @@
 // by dribehance <dribehance.kksdapp.com>
-angular.module("Skillopedia", [
+angular.module("Transport", [
 		"ngRoute",
 		// "mobile-angular-ui",
 		// "mobile-angular-ui.core",
@@ -28,5 +28,5 @@ angular.module("Skillopedia", [
 
 	}).run(function(appServices) {
 		// init event such as routechangestart...
-		// appServices.init();
+		appServices.init();
 	});

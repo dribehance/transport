@@ -1,0 +1,59 @@
+<!-- header -->
+<dribehance-header title="'集運訂單'"></dribehance-header>
+<div class="list-group">
+    <div class="list-group-item clearfix">
+        <p class="clearfix">
+            單號：1463449524185 <span class="pull-right">未付款 <span class="text-primary">去付款</span></span>
+        </p>
+        <p class="clearfix" style="margin-bottom:5px">
+            <span class="col-xs-5">重量：3kg</span>
+            <span class="col-xs-7">服務：送貨上門</span>
+        </p>
+        <p class="clearfix" style="margin-bottom:5px">
+            <span class="col-xs-5">包裝費：14HKB</span>
+            <span class="col-xs-7">價格：<span class="text-primary">14HKB</span>(10RMB)</span>
+        </p>
+        <p>創建時間：2016-03-06 15:30</p>
+        <div>自提/派送地址：Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto obcaecati dicta atque nihil, repellendus, sed dignissimos aut illum libero molestiae</div>
+        <div class="order-detail bg-gray-lighter" ng-if="order.id == preview_id">
+            <div class="cargo-item">
+                <div class="cargo-header clearfix">
+                    快遞編號：036569228
+                    <span class="pull-right">代入倉</span>
+                </div>
+                <div class="cargo-content">
+                    <p>快遞公司：申通快遞</p>
+                    <p>備註：</p>
+                    <p class="clearfix">
+                        <span class="pull-left">公斤：3.0</span>
+                        <span class="pull-right">體重：5cmx6cmx8cm</span>
+                    </p>
+                    <p>創建時間：2015-06-30 15:00</p>
+                </div>
+                <div class="cargo-action">
+                    <!-- <i class="fa fa-check-square-o"></i> -->
+                </div>
+            </div>
+            <div class="cargo-item">
+                <div class="cargo-header clearfix">
+                    快遞編號：036569228
+                    <span class="pull-right">代入倉</span>
+                </div>
+                <div class="cargo-content">
+                    <p>快遞公司：申通快遞</p>
+                    <p>備註：</p>
+                    <p class="clearfix">
+                        <span class="pull-left">公斤：3.0</span>
+                        <span class="pull-right">體重：5cmx6cmx8cm</span>
+                    </p>
+                    <p>創建時間：2015-06-30 15:00</p>
+                </div>
+                <div class="cargo-action">
+                    <!-- <i class="fa fa-check-square-o"></i> -->
+                </div>
+            </div>
+        </div>
+        <div class="pull-right" ng-if="preview_id == ''" ng-click="preview(order.id)">點擊查看詳情</div>
+        <div class="pull-right" ng-if="preview_id != ''" ng-cick="hide(order.id)">收起詳情</div>
+    </div>
+</div>

@@ -1,0 +1,127 @@
+<!-- header -->
+<dribehance-header title="'合併貨物'"></dribehance-header>
+<div class="list-group has-bottom">
+    <div class="list-group-item">
+        <div class="input-group clearfix">
+            <div class="input-label">
+                集運方式<span class="text-primary text-small">( 集運方式不同，计费不用)</span>
+            </div>
+            <div class="col-xs-6">
+                <label for="radio_1">
+                    <input type="radio" id="radio_1" class="hide" value="self" ng-model="transport.way"><i class="fa fa-circle-o" ng-class="{'text-primary':transport.way == 'self' }"></i> 自取</label>
+            </div>
+            <div class="col-xs-6">
+                <label for="radio_2">
+                    <input type="radio" id="radio_2" class="hide" value="travel" ng-model="transport.way"><i class="fa fa-circle-o" ng-class="{'text-primary':transport.way == 'travel' }"></i>送貨上門 </label>
+            </div>
+        </div>
+    </div>
+    <div class="list-group-item" ng-if="transport.way =='self'">
+        <div class="input-group clearfix">
+            <div class="input-label">
+                自取地點
+            </div>
+            <select name="" id="" class="form-control full-width">
+                <option value="香港">香港</option>
+            </select>
+        </div>
+    </div>
+    <div class="list-group-item" ng-if="transport.way =='travel'">
+        <div class="input-group clearfix">
+            <div class="input-label">
+                地址類別<span class="text-primary text-small">( 地址類別，计费不用)</span>
+            </div>
+            <div class="col-xs-6">
+                <label for="radio_3">
+                    <input type="radio" id="radio_3" class="hide" value="business" ng-model="transport.address_type"><i class="fa fa-circle-o" ng-class="{'text-primary':transport.address_type == 'business' }"></i> 工商區</label>
+            </div>
+            <div class="col-xs-6">
+                <label for="radio_4">
+                    <input type="radio" id="radio_4" class="hide" value="house" ng-model="transport.address_type"><i class="fa fa-circle-o" ng-class="{'text-primary':transport.address_type == 'house' }"></i>住宅區 </label>
+            </div>
+        </div>
+    </div>
+    <div class="list-group-item">
+        <div class="input-group clearfix">
+            <div class="input-label">
+                付款方式<span class="text-primary text-small">( 其他付款查詢:whatsapp 52285725)</span>
+            </div>
+            <select name="" id="" class="form-control full-width">
+                <option value="支付寶">支付寶</option>
+            </select>
+        </div>
+    </div>
+    <div class="list-group-item">
+        <div class="input-group clearfix">
+            <div class="input-label">
+                營業時間<span class="text-primary text-small">( 時段選擇，方便寄送)</span>
+            </div>
+            <select name="" id="" class="form-control full-width">
+                <option value="星期一至六 9:00-18:00">星期一至六 9:00-18:00</option>
+            </select>
+        </div>
+    </div>
+    <!-- <div class="list-group-item">
+        <div class="input-group clearfix">
+            <div class="input-label">
+                運費合計<span class="text-primary text-small"></span>
+            </div>
+            
+        </div>
+    </div> -->
+    <div class="list-group-item bg-gray-lighter" ng-if="transport.preview=='preview'">
+        <div class="cargo-item">
+            <div class="cargo-header clearfix">
+                快遞編號：036569228
+                <span class="pull-right">代入倉</span>
+            </div>
+            <div class="cargo-content">
+                <p>快遞公司：申通快遞</p>
+                <p>備註：</p>
+                <p class="clearfix">
+                    <span class="pull-left">公斤：3.0</span>
+                    <span class="pull-right">體重：5cmx6cmx8cm</span>
+                </p>
+                <p>創建時間：2015-06-30 15:00</p>
+            </div>
+            <div class="cargo-action">
+                <!-- <i class="fa fa-check-square-o"></i> -->
+            </div>
+        </div>
+        <div class="cargo-item">
+            <div class="cargo-header clearfix">
+                快遞編號：036569228
+                <span class="pull-right">代入倉</span>
+            </div>
+            <div class="cargo-content">
+                <p>快遞公司：申通快遞</p>
+                <p>備註：</p>
+                <p class="clearfix">
+                    <span class="pull-left">公斤：3.0</span>
+                    <span class="pull-right">體重：5cmx6cmx8cm</span>
+                </p>
+                <p>創建時間：2015-06-30 15:00</p>
+            </div>
+            <div class="cargo-action">
+                <!-- <i class="fa fa-check-square-o"></i> -->
+            </div>
+        </div>
+    </div>
+    <div class="wrap clearfix">
+        <label class="pull-right" ng-if="transport.preview=='hide'">
+            <input type="radio" class="hide" ng-model="transport.preview" value="preview">共1件集運 共0.3KG,查看選中的貨物
+        </label>
+        <label class="pull-right" ng-if="transport.preview=='preview'">
+            <input type="radio" class="hide" ng-model="transport.preview" value="hide"> 收起選中的貨物
+        </label>
+    </div>
+</div>
+<div class="tab-bar bottom">
+    <div class="tab-item">
+        <span class="text-small">20.00RMB</span>
+        <span class="text-small">24.99HKD</span>
+    </div>
+    <div class="tab-item">
+        <span class="btn btn-primary full-width" ng-click="merge()">確認</span>
+    </div>
+</div>
