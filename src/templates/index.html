@@ -1,10 +1,7 @@
 <script type="text/javascript" src="lib/js/lib.js"></script>
-<div class="owl-carousel owl-theme">
-    <img ng-src="http://m.taopai.hk/content/images/banner1.jpg" alt="">
-    <img ng-src="http://m.taopai.hk/content/images/banner2.jpg" alt="">
-    <img ng-src="http://m.taopai.hk/content/images/banner3.jpg" alt="">
-    <img ng-src="http://m.taopai.hk/content/images/banner2.jpg" alt="">
-</div>
+<banner data-rate="1101/382">
+    <imageview data-rate="1101/382" ng-repeat="banner in banners" src="staticImageUrl+banner.cover" on-repeat-done alt=""></imageview>
+</banner>
 <div class="grid">
     <a ng-href="#/account" class="grid-item">
         <img ng-src="images/mp1.jpg" class="grid-img" alt="">
@@ -60,18 +57,19 @@
 				公司介紹
 			</span>
     </a>
-    <a ng-href="#/contact" class="grid-item">
+    <a ng-href="#/teaching" class="grid-item">
         <img ng-src="images/mp10.jpg" class="grid-img" alt="">
         <span class="grid-title block">
-				聯繫我們
+				集運教學
 			</span>
     </a>
 </div>
 <div class="footer">
     <div class="wrap">
         <div class="section text-center">
-            <a class="col-xs-6 block" ng-href="#/signin">登录</a>
-            <a class="col-xs-6 block" ng-href="#/signup">注册</a>
+            <a class="col-xs-4 block" ng-href="#/contact">聯繫我們</a>
+            <a class="col-xs-4 block" ng-href="#/signin">登錄</a>
+            <a class="col-xs-4 block" ng-href="#/signup">註冊</a>
         </div>
         <div class="copyright text-center">
             Copyright © 2014-2015 咇咇集运bibicargo.com 版權所有

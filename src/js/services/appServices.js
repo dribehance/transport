@@ -1,6 +1,6 @@
  // by dribehance <dribehance.kksdapp.com>
  // EventHandle
- angular.module("Transport").factory("appServices", function($rootScope, $window, $location, errorServices, toastServices) {
+ angular.module("Transport").factory("appServices", function($rootScope, $window, $location, errorServices, toastServices, config) {
  	var routeChangeStart = function(e) {
  		// do something white routechangestart,eg:
  		// toastServices.show();
@@ -34,6 +34,7 @@
  			$rootScope.back = function() {
  				$window.history.back();
  			}
+ 			$rootScope.staticImageUrl = config.imageUrl;
  		}
  	}
  });

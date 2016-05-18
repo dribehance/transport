@@ -1,6 +1,7 @@
 // by dribehance <dribehance.kksdapp.com>
 angular.module("Transport", [
 		"ngRoute",
+		"ngSanitize",
 		// "mobile-angular-ui",
 		// "mobile-angular-ui.core",
 		"LocalStorageModule",

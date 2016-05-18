@@ -1,6 +1,6 @@
 angular.module("Transport").constant("config", {
-	url: "http://",
-	imageUrl: "http://",
+	url: "http://203.88.161.147",
+	imageUrl: "http://www.bibicargo.com/files/image?name=",
 	request: {
 		"SUCCESS": "200",
 		"TOKEN_INVALID": "405"
@@ -8,7 +8,9 @@ angular.module("Transport").constant("config", {
 	response: {
 		"SUCCESS": 1
 	},
-	common_params: {},
+	common_params: {
+		invoke: "h5"
+	},
 	interceptor: [
 		"about",
 		"account",
@@ -33,6 +35,7 @@ angular.module("Transport").constant("config", {
 		"question",
 		"services",
 		"signin",
-		"signup"
+		"signup",
+		"teaching"
 	]
 });
