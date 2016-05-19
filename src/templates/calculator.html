@@ -1,42 +1,52 @@
 <!-- header -->
 <dribehance-header title="'計算器'"></dribehance-header>
-<div class="wrap has-bottom">
-    重量比較輕而體積比較大的貨物,快遞公司是按體積重收費的.
-    <div class="text-primary">*體積重量=長X寬X高/6000(單位cm)</div>
-    <div class="input-group">
-        <div class="input-label">長度(CM)</div>
-        <input type="text" class="form-control full-width" placeholder="請輸入長度(數字)">
-    </div>
-    <div class="input-group">
-        <div class="input-label">寬度(CM)</div>
-        <input type="text" class="form-control full-width" placeholder="請輸入寬度(數字)">
-    </div>
-    <div class="input-group">
-        <div class="input-label">高度(CM)</div>
-        <input type="text" class="form-control full-width" placeholder="請輸入高度(數字)">
-    </div>
-    <div class="input-group">
-        <div class="input-label">貨品重量(KG)</div>
-        <input type="text" class="form-control full-width" placeholder="請輸入貨品重量(KG)">
-    </div>
-    <div class="input-group">
-        <div class="input-label">集運方式</div>
-        <div class="clearfix text-center">
-            <label for="radio_1" class="col-xs-4" ng-class="{'text-primary':transport.way == 'self'}">
-                <input type="radio" class="hide" id="radio_1" value="self" ng-model="transport.way"><i class="fa fa-circle-o"></i>自取</label>
-            <label for="radio_2" class="col-xs-4" ng-class="{'text-primary':transport.way == 'business'}">
-                <input type="radio" class="hide" id="radio_2" value="business" ng-model="transport.way"><i class="fa fa-circle-o"></i>工商區</label>
-            <label for="radio_3" class="col-xs-4" ng-class="{'text-primary':transport.way == 'house'}">
-                <input type="radio" class="hide" id="radio_3" value="house" ng-model="transport.way"><i class="fa fa-circle-o"></i>住宅區</label>
+<form ng-submit="ajaxForm" name="calculatorForm">
+    <div class="wrap has-bottom">
+        重量比較輕而體積比較大的貨物,快遞公司是按體積重收費的.
+        <p class="text-primary">*體積重量=長X寬X高/6000(單位cm)</p>
+        <div class="col-xs-6">
+            <div class="input-group">
+                <div class="input-label">長度(CM)</div>
+                <input type="text" class="form-control full-width text-small" ng-model="input.long" name="long" required placeholder="請輸入長度(數字)">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="input-group">
+                <div class="input-label">寬度(CM)</div>
+                <input type="text" class="form-control full-width text-small" ng-model="input.wide" name="wide" required placeholder="請輸入寬度(數字)">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="input-group">
+                <div class="input-label">高度(CM)</div>
+                <input type="text" class="form-control full-width text-small" ng-model="input.height" name="height" required placeholder="請輸入高度(數字)">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="input-group">
+                <div class="input-label">貨品重量(KG)</div>
+                <input type="text" class="form-control full-width text-small" ng-model="input.weight" name="weight" required placeholder="請輸入貨品重量(KG)">
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="input-label">集運方式</div>
+            <div class="clearfix text-center">
+                <label for="radio_1" class="col-xs-4" ng-class="{'text-primary':transport.way == 'self'}">
+                    <input type="radio" class="hide" id="radio_1" value="self" ng-model="transport.way"><i class="fa fa-circle-o"></i>自取</label>
+                <label for="radio_2" class="col-xs-4" ng-class="{'text-primary':transport.way == 'business'}">
+                    <input type="radio" class="hide" id="radio_2" value="business" ng-model="transport.way"><i class="fa fa-circle-o"></i>工商區</label>
+                <label for="radio_3" class="col-xs-4" ng-class="{'text-primary':transport.way == 'house'}">
+                    <input type="radio" class="hide" id="radio_3" value="house" ng-model="transport.way"><i class="fa fa-circle-o"></i>住宅區</label>
+            </div>
         </div>
     </div>
-</div>
-<div class="tab-bar bottom">
-    <div class="tab-item multi-line">
-        <div class="text-small">體積重：0.00KG</div>
-        <div>運費：24.99RMB</div>
+    <div class="tab-bar bottom">
+        <div class="tab-item multi-line">
+            <div class="text-small">體積重：0.00KG</div>
+            <div>運費：24.99RMB</div>
+        </div>
+        <div class="tab-item">
+            <span class="btn btn-primary full-width" type="submit" ng-disabled="calculatorForm.$invalid">確認</span>
+        </div>
     </div>
-    <div class="tab-item">
-        <span class="btn btn-primary full-width" ng-click="merge()">確認</span>
-    </div>
-</div>
+</form>

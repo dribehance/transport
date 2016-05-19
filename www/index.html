@@ -15,16 +15,26 @@
     <script src="//cdn.bootcss.com/angular-local-storage/0.2.7/angular-local-storage.js"></script>
     <script src="//cdn.bootcss.com/angular-sanitize/1.5.5/angular-sanitize.min.js"></script>
     <script src="//cdn.bootcss.com/OwlCarousel2/2.1.3/owl.carousel.min.js"></script>
+    <script src="//cdn.bootcss.com/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
     <script src="js/app.min.js"></script>
     <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="//cdn.bootcss.com/normalize/4.1.1/normalize.min.css" rel="stylesheet">
     <link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet">
     <link href="//cdn.bootcss.com/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet">
     <link href="css/app.min.css" rel="stylesheet" />
 </head>
 
 <body>
     <ng-view></ng-view>
+    <!-- error -->
+    <div class="error-msg">{{error_message}}</div>
+    <!-- toast -->
+    <div class="toast hide">
+        <span class="loader"></span>
+    </div>
+    <!-- progress -->
+    <div class="progress"></div>
     <script type="text/javascript">
     $(document).ready(function() {
         angular.bootstrap($("html"), ['Transport']);

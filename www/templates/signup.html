@@ -1,31 +1,37 @@
 <!-- header -->
 <dribehance-header title="'註冊'"></dribehance-header>
 <div class="wrap">
-    <div class="input-group">
-        <div class="input-label"><span class="text-primary">*</span>姓名/稱呼</div>
-        <input type="text" class="form-control full-width" placeholder="姓名/稱呼">
-    </div>
-    <div class="input-group clearfix">
-        <div class="input-label"><span class="text-primary">*</span>手機號：</div>
-        <div class="col-xs-7">
-        	<input type="text" class="form-control full-width" placeholder="手機號">
+    <form ng-submit="ajaxForm()" name="signupForm">
+        <div class="input-group">
+            <div class="input-label"><span class="text-primary">*</span>姓名/稱呼</div>
+            <input type="text" class="form-control full-width" ng-model="input.username" name="username" required placeholder="姓名/稱呼">
         </div>
-        <div class="col-xs-4">
-        	<button class="btn btn-primary btn-lg">發送驗證碼</button>
+        <div class="input-group clearfix">
+            <div class="input-label"><span class="text-primary">*</span>手機號：</div>
+            <input type="text" class="form-control full-width" ng-model="input.telephone" name="telephone" required placeholder="手機號">
         </div>
-    </div>
-    <div class="input-group">
-        <div class="input-label"><span class="text-primary">*</span>密碼</div>
-        <input type="text" class="form-control full-width" placeholder="密碼">
-    </div>
-    <div class="input-group">
-        <div class="input-label"><span class="text-primary">*</span>確認密碼</div>
-        <input type="text" class="form-control full-width" placeholder="確認密碼">
-    </div>
-    <div class="input-group">
-        <div class="input-label"><span class="text-primary">*</span>電子郵件</div>
-        <input type="text" class="form-control full-width" placeholder="電子郵件(用於找回密碼)">
-    </div>
-    <p class="text-center"><a ng-href="#/privacy">《咇咇集運服務條款》</a></p>
-    <button class="btn btn-lg btn-primary full-width">同意協議並註冊</button>
+        <div class="input-group clearfix">
+            <div class="input-label"><span class="text-primary">*</span>驗證碼：</div>
+            <div class="col-xs-6">
+                <input type="text" class="form-control full-width" ng-model="input.smscode" name="smscode" required placeholder="驗證碼">
+            </div>
+            <div class="col-xs-6">
+                <countdown class="btn btn-primary btn-lg full-width" countdown="countdown" countdown-disabled="signupForm.telephone.$invalid">{{countdown.message}}</countdown>
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="input-label"><span class="text-primary">*</span>密碼</div>
+            <input type="password" class="form-control full-width" ng-model="input.password" name="passowrd" required placeholder="密碼">
+        </div>
+        <div class="input-group">
+            <div class="input-label"><span class="text-primary">*</span>確認密碼</div>
+            <input type="password" class="form-control full-width" ng-model="input.password_1" name="password_1" required placeholder="確認密碼">
+        </div>
+        <div class="input-group">
+            <div class="input-label"><span class="text-primary">*</span>電子郵件</div>
+            <input type="text" class="form-control full-width" ng-model="input.email" name="email" required placeholder="電子郵件(用於找回密碼)">
+        </div>
+        <p class="text-center"><a ng-href="#/privacy">《咇咇集運服務條款》</a></p>
+        <button class="btn btn-lg btn-primary full-width" type="submit" ng-disabled="signupForm.$invalid">同意協議並註冊</button>
+    </form>
 </div>

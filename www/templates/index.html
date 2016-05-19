@@ -64,12 +64,14 @@
 			</span>
     </a>
 </div>
-<div class="footer">
+<div class="footer" ng-controller="signinController">
     <div class="wrap">
         <div class="section text-center">
             <a class="col-xs-4 block" ng-href="#/contact">聯繫我們</a>
-            <a class="col-xs-4 block" ng-href="#/signin">登錄</a>
-            <a class="col-xs-4 block" ng-href="#/signup">註冊</a>
+            <a class="col-xs-4 block" ng-href="#/signin" ng-if="!is_signin()">登錄</a>
+            <a class="col-xs-4 block" ng-href="#/signup" ng-if="!is_signin()">註冊</a>
+            <a class="col-xs-4 block" ng-href="#/me_info" ng-if="is_signin()">個人資料</a>
+            <a class="col-xs-4 block" ng-click="logout()" ng-if="is_signin()">註銷</a>
         </div>
         <div class="copyright text-center">
             Copyright © 2014-2015 咇咇集运bibicargo.com 版權所有

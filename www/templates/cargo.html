@@ -1,38 +1,38 @@
 <div class="header">
     <i class="fa fa-angle-left pull-left back-action" ng-click="back()"></i>
     <span class="head-text">
-			我要集運
-		</span>
-	<a ng-href="#/cargos" class="pull-right text-white extend-action">貨物列表</a>
+            我要集運
+        </span>
+    <a ng-href="#/cargos" class="pull-right text-white extend-action">貨物列表</a>
 </div>
 <div class="wrap">
-    <div class="input-group">
-        <div class="input-label">
-            快遞編號<span class="text-primary text-small">(如實填寫，方便查閱)</span>
+    <form ng-submit="ajaxForm()" name="transportForm">
+        <div class="input-group">
+            <div class="input-label">
+                快遞編號<span class="text-primary text-small">(如實填寫，方便查閱)</span>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="input.number" name="number" required placeholder="必填快遞編號">
         </div>
-        <input type="text" class="form-control full-width" placeholder="必填快遞編號">
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            快遞公司<span class="text-primary text-small">(挑選快遞公司，盡快出貨)</span>
+        <div class="input-group">
+            <div class="input-label">
+                快遞公司<span class="text-primary text-small">(挑選快遞公司，盡快出貨)</span>
+            </div>
+            <select class="form-control full-width" ng-model="input.company" name="company" ng-options="value for value in input.companys" required></select>
         </div>
-        <select class="form-control full-width">
-            <option value="香港">香港</option>
-        </select>
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            貨物名稱<span class="text-primary text-small">(詳細填寫，以便認領)</span>
+        <div class="input-group">
+            <div class="input-label">
+                貨物名稱<span class="text-primary text-small">(詳細填寫，以便認領)</span>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="input.tag" name="tag" required placeholder="必填貨物名稱">
         </div>
-        <input type="text" class="form-control full-width" placeholder="必填貨物名稱">
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            備註<span class="text-primary text-small">(填寫備註，以便我們查閱)</span>
+        <div class="input-group">
+            <div class="input-label">
+                備註<span class="text-primary text-small">(填寫備註，以便我們查閱)</span>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="input.remarks" name="remarks" placeholder="选填備註">
         </div>
-        <input type="text" class="form-control full-width" placeholder="选填備註">
-    </div>
-    <div class="text-center">
-        <button class="btn btn-primary full-width">確認</button>
-    </div>
+        <div class="text-center">
+            <button class="btn btn-primary full-width" ng-disabled="transportForm.$invalid">確認</button>
+        </div>
+    </form>
 </div>

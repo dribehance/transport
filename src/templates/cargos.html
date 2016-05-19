@@ -1,45 +1,28 @@
 <!-- header -->
 <dribehance-header title="'貨物列表'"></dribehance-header>
 <div class="wrap has-bottom">
-	<div class="cargo-item">
+	<div class="cargo-item" ng-repeat="cargo in cargos" ng-class="{'text-primary':cargo.checked}" ng-click="check(cargo)">
 		<div class="cargo-header clearfix">
-			快遞編號：036569228
-			<span class="pull-right">代入倉</span>
+			快遞編號：{{cargo.express_number}}
+			<span class="pull-right">{{get_status(cargo.status)}}</span>
 		</div>
 		<div class="cargo-content">
-			<p>快遞公司：申通快遞</p>
-			<p>備註：</p>
+			<p>快遞公司：{{cargo.express_company}}</p>
+			<p>備註：{{cargo.remarks||'無'}}</p>
 			<p class="clearfix">
-				<span class="pull-left">公斤：3.0</span>
-				<span class="pull-right">體重：5cmx6cmx8cm</span>
+				<span class="pull-left">公斤：{{cargo.kg}}kg</span>
+				<span class="pull-right">體重：{{cargo.long ||'0'}}cmx{{cargo.wide||'0'}}cmx{{cargo.height||'0'}}cm</span>
 			</p>
-			<p>創建時間：2015-06-30 15:00</p>
+			<p>創建時間：{{cargo.post_time}}</p>
 		</div>
 		<div class="cargo-action">
 			<i class="fa fa-check-square-o"></i>
 		</div>
 	</div>
-	<div class="cargo-item text-primary">
-		<div class="cargo-header clearfix">
-			快遞編號：036569228
-			<span class="pull-right">代入倉</span>
-		</div>
-		<div class="cargo-content">
-			<p>快遞公司：申通快遞</p>
-			<p>備註：</p>
-			<p class="clearfix">
-				<span class="pull-left">公斤：3.0</span>
-				<span class="pull-right">體重：5cmx6cmx8cm</span>
-			</p>
-			<p>創建時間：2015-06-30 15:00</p>
-		</div>
-		<div class="cargo-action">
-			<i class="fa fa-check-square-o"></i>
-		</div>
-	</div>
+	<div class="btn text-center full-width" ng-click="loadMore()">{{page.message}}</div>
 </div>
 <div class="tab-bar bottom">
-	<div class="tab-item">
+	<div class="tab-item" ng-click="check_reverse()">
 		<i class="fa fa-square-o"></i>反選
 	</div>
 	<div class="tab-item" >

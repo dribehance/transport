@@ -1,17 +1,19 @@
 <!-- header -->
 <dribehance-header title="'登录'"></dribehance-header>
 <div class="wrap">
-    <div class="input-group">
-        <div class="input-label">賬戶名稱：</div>
-        <input type="text" class="form-control full-width" placeholder="手機號碼">
-    </div>
-    <div class="input-group">
-        <div class="input-label">密碼：</div>
-        <input type="text" class="form-control full-width" placeholder="密碼">
-    </div>
-    <div class="input-group clearfix">
-        <a class="pull-left" ng-href="#/forget">忘記密碼</a>
-        <a class="pull-right" ng-href="#/signup">免費註冊</a>
-    </div>
-    <button class="btn btn-lg btn-primary full-width">登錄</button>
+    <form ng-submit="ajaxForm()" name="signinForm">
+        <div class="input-group">
+            <div class="input-label">賬戶名稱：</div>
+            <input type="text" class="form-control full-width" ng-model="input.telephone" required placeholder="手機號碼">
+        </div>
+        <div class="input-group">
+            <div class="input-label">密碼：</div>
+            <input type="password" class="form-control full-width" ng-model="input.password" required placeholder="密碼">
+        </div>
+        <div class="input-group clearfix">
+            <a class="pull-left" ng-href="#/forget">忘記密碼</a>
+            <a class="pull-right" ng-href="#/signup">免費註冊</a>
+        </div>
+        <button class="btn btn-lg btn-primary full-width" type="submit" ng-disabled="signinForm.$invalid">登錄</button>
+    </form>
 </div>

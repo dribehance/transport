@@ -17,8 +17,21 @@ angular.module("Transport", [
 			$routeProvider.when("/" + path, {
 				templateUrl: "templates/" + path + ".html",
 				reloadOnSearch: false,
-				controller: controllername
-			})
+				controller: controllername,
+				resolve: {
+					user: function($q, $location, localStorageService) {
+						var resolve_path = ["account", "me_info", "address", "create_address", "cargo", "cargos", "cargos_merge", "orders", "services", "charge_records", "askforpay_records"],
+							defer = $q.defer();
+						if (resolve_path.includes(path) && !localStorageService.get("token")) {
+							defer.reject();
+							$location.path("/signin").replace();
+							return;
+						}
+						defer.resolve();
+						return defer.promise;
+					}
+				}
+			});
 		})
 		$routeProvider.otherwise("/index");
 		$httpProvider.defaults.useXDomain = true;

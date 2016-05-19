@@ -1,9 +1,23 @@
 // by dribehance <dribehance.kksdapp.com>
 angular.module("Transport").factory("errorServices", function($rootScope, $timeout, toastServices) {
 	return {
-		show: function(error) {},
-		hide: function() {},
-		autoHide: function(error) {},
+		show: function(error) {
+			console.log(error)
+			$rootScope.error_message = error;
+			$(".error-msg").show();
+		},
+		hide: function() {
+			$rootScope.error_message = "";
+			$(".error-msg").hide();
+		},
+		autoHide: function(error) {
+			$rootScope.error_message = error;
+			$(".error-msg").show();
+			$timeout(function() {
+				$rootScope.error_message = "";
+				$(".error-msg").hide();
+			}, 3000)
+		},
 		requestError: function(data, status, headers, config) {
 			// hide toast
 			toastServices.hide();

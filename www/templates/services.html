@@ -1,98 +1,102 @@
 <!-- header -->
 <dribehance-header title="'我要服務'"></dribehance-header>
 <div class="tab-bar top text-center">
-    <div class="tab-item active" ng-class="{'active':services.state=='charge'}" ng-click="change('charge')">充值(支付寶)</div>
+    <div class="tab-item" ng-class="{'active':services.state=='charge'}" ng-click="change('charge')">充值(支付寶)</div>
     <div class="tab-item" ng-class="{'active':services.state=='askforpay'}" ng-click="change('askforpay')">代付服務</div>
 </div>
 <div class="wrap" ng-if="services.state=='charge'">
-    <div class="input-group">
-        <div class="input-label">
-            公司銀行名稱<span class="text-primary text-small"></span>
+    <form ng-submit="ajaxForm()" name="chargeForm">
+        <div class="input-group">
+            <div class="input-label">
+                公司銀行名稱<span class="text-primary text-small"></span>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="charge.company" name="charge_company" required readonly placeholder="公司銀行名稱">
         </div>
-        <input type="text" class="form-control full-width" placeholder="必填快遞編號">
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            充值方式<span class="text-primary text-small">(官方指定南洋商業銀行)</span>
+        <div class="input-group">
+            <div class="input-label">
+                充值方式<span class="text-primary text-small">(官方指定南洋商業銀行)</span>
+            </div>
+            <select class="form-control full-width text-small">
+                <option value="南洋商業銀行043-495-1-043129-7">南洋商業銀行043-495-1-043129-7</option>
+            </select>
         </div>
-        <select class="form-control full-width">
-            <option value="南洋商業銀行043-495-1-043129-7">南洋商業銀行043-495-1-043129-7</option>
-        </select>
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            需充值支付寶賬戶<span class="text-primary text-small">(如實填寫，以免出錯)</span>
+        <div class="input-group">
+            <div class="input-label">
+                需充值支付寶賬戶<span class="text-primary text-small">(如實填寫，以免出錯)</span>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="charge.alipay" name="charge_alipay" required placeholder="支付寶賬戶">
         </div>
-        <input type="text" class="form-control full-width" placeholder="支付寶賬戶">
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            該支付寶持有人姓名<span class="text-primary text-small">(如實填寫，以免出錯)</span>
+        <div class="input-group">
+            <div class="input-label">
+                該支付寶持有人姓名<span class="text-primary text-small">(如實填寫，以免出錯)</span>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="charge.alipay_owner" name="charge_alipay_owner" required placeholder="該支付寶持有人姓名">
         </div>
-        <input type="text" class="form-control full-width" placeholder="該支付寶持有人姓名">
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            充值金額(RMB)<span class="text-primary text-small"></span>
+        <div class="input-group">
+            <div class="input-label">
+                充值金額(RMB)<span class="text-primary text-small"></span>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="charge.rmb" name="charge_rmb" required placeholder="請輸入充值金額(數字)">
         </div>
-        <input type="text" class="form-control full-width" placeholder="請輸入充值金額(數字)">
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            需要入帳金額(HKD)<span class="text-primary text-small">出入RMB，自動換算HKD</span>
+        <div class="input-group">
+            <div class="input-label">
+                需要入帳金額(HKD)<span class="text-primary text-small">出入RMB，自動換算HKD</span>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="charge.hkd" name="charge_hkd" required readonly placeholder="自動換算HKD">
         </div>
-        <input type="text" class="form-control full-width" placeholder="" readonly>
-    </div>
-    <p class="text-center">
-        <button class="btn btn-primary full-width">創建訂單</button>
-    </p>
-    <p class="text-center">
-        <a class="btn btn-success full-width" ng-href="#/charge_records">查看充值記錄</a>
-    </p>
+        <p class="text-center">
+            <button class="btn btn-primary full-width" type="submit" ng-disabled="chargeForm.$invalid">創建訂單</button>
+        </p>
+        <p class="text-center">
+            <a class="btn btn-success full-width" ng-href="#/charge_records">查看充值記錄</a>
+        </p>
+    </form>
 </div>
 <div class="wrap" ng-if="services.state=='askforpay'">
-    <div class="input-group">
-        <div class="input-label">
-            代付申請人<span class="text-primary text-small">您的支付寶賬戶</span>
+    <form ng-submit="ajaxForm_1()" name="askforpayForm">
+        <div class="input-group">
+            <div class="input-label">
+                代付申請人<span class="text-primary text-small">您的支付寶賬戶</span>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="askforpay.alipay" name="askforpay_alipay" required placeholder="您的支付寶賬戶">
         </div>
-        <input type="text" class="form-control full-width" placeholder="您的支付寶賬戶">
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            代付交易號<span class="text-primary text-small">(於支付寶內可查看)</span>
+        <div class="input-group">
+            <div class="input-label">
+                代付交易號<span class="text-primary text-small">(於支付寶內可查看)</span>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="askforpay.transcation_id" name="askforpay_transcation_id" required placeholder="支付寶賬戶">
         </div>
-        <input type="text" class="form-control full-width" placeholder="支付寶賬戶">
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            代付金額(RMB)<span class="text-primary text-small">如實填寫，輸入數字</span>
+        <div class="input-group">
+            <div class="input-label">
+                代付金額(RMB)<span class="text-primary text-small">如實填寫，輸入數字</span>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="askforpay.rmb" name="askforpay_rmb" required placeholder="請輸入充值金額(數字)">
         </div>
-        <input type="text" class="form-control full-width" placeholder="請輸入充值金額(數字)">
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            需要入帳金額(HKD)<span class="text-primary text-small">出入RMB，自動換算HKD</span>
+        <div class="input-group">
+            <div class="input-label">
+                需要入帳金額(HKD)<span class="text-primary text-small">出入RMB，自動換算HKD</span>
+            </div>
+            <input type="text" class="form-control full-width text-small" value="共{{askforpay.total_hkd}}={{askforpay.hkd}}(經換算)+{{askforpay.fee}}(3%服務費)"  required readonly>
         </div>
-        <input type="text" class="form-control full-width" value="共0.00=0.00(經換算)+0.00(3%服務費)" placeholder="" readonly>
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            入賬方式<span class="text-primary text-small">(官方指定南洋商業銀行)</span>
+        <div class="input-group">
+            <div class="input-label">
+                入賬方式<span class="text-primary text-small">(官方指定南洋商業銀行)</span>
+            </div>
+            <select class="form-control full-width text-small">
+                <option value="南洋商業銀行043-495-1-043129-7">南洋商業銀行043-495-1-043129-7</option>
+            </select>
         </div>
-        <select class="form-control full-width">
-            <option value="南洋商業銀行043-495-1-043129-7">南洋商業銀行043-495-1-043129-7</option>
-        </select>
-    </div>
-    <div class="input-group">
-        <div class="input-label">
-            公司銀行名稱<span class="text-primary text-small"></span>
+        <div class="input-group">
+            <div class="input-label">
+                公司銀行名稱<span class="text-primary text-small"></span>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="askforpay.company" name="askforpay_company" required readonly>
         </div>
-        <input type="text" class="form-control full-width" value="Highway Technology Limited" readonly>
-    </div>
-    <p class="text-center">
-        <button class="btn btn-primary full-width">創建代付訂單</button>
-    </p>
-    <p class="text-center">
-        <a class="btn btn-success full-width" ng-href="#/askforpay_records">查看代付記錄</a>
-    </p>
+        <p class="text-center">
+            <button class="btn btn-primary full-width" ng-disabled="askforpayForm.$invalid">創建代付訂單</button>
+        </p>
+        <p class="text-center">
+            <a class="btn btn-success full-width" ng-href="#/askforpay_records">查看代付記錄</a>
+        </p>
+    </form>
 </div>

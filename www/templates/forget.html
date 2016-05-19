@@ -1,3 +1,21 @@
+<!-- header -->
+<dribehance-header title="'找回密碼'"></dribehance-header>
 <div class="wrap">
-	forget
+    <form ng-submit="ajaxForm()" name="forgetForm">
+        <div class="input-group clearfix">
+            <div class="input-label"><span class="text-primary">*</span>手機號：</div>
+            <input type="text" class="form-control full-width" ng-model="input.telephone" name="telephone" required placeholder="手機號">
+        </div>
+        <div class="input-group clearfix">
+            <div class="input-label"><span class="text-primary">*</span>驗證碼：</div>
+            <div class="col-xs-6">
+                <input type="text" class="form-control full-width" ng-model="input.smscode" name="smscode" required placeholder="驗證碼">
+            </div>
+            <div class="col-xs-6">
+                <countdown class="btn btn-primary btn-lg full-width" countdown="countdown" countdown-disabled="forgetForm.telephone.$invalid">{{countdown.message}}</countdown>
+            </div>
+        </div>
+        <div class="wrap"></div>
+        <button class="btn btn-lg btn-primary full-width" type="submit" ng-disabled="forgetForm.$invalid">重置密碼</button>
+    </form>
 </div>

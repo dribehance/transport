@@ -41,6 +41,16 @@ angular.module("Transport").factory("transportServices", function($http, config)
 				return data.data;
 			});
 		},
+		query_calculator_constant: function() {
+			return $http({
+				// by dribehance <dribehance.kksdapp.com>
+				url: config.url + "/mobile/Home/fee",
+				method: "GET",
+				params: angular.extend({}, config.common_params, input)
+			}).then(function(data) {
+				return data.data;
+			});
+		},
 		query_news: function(input) {
 			return $http({
 				// by dribehance <dribehance.kksdapp.com>
