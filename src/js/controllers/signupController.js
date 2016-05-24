@@ -1,5 +1,5 @@
 // by dribehance <dribehance.kksdapp.com>
-angular.module("Transport").controller("signupController", function($scope, userServices, errorServices, toastServices, localStorageService, config) {
+angular.module("Transport").controller("signupController", function($scope, $location, userServices, errorServices, toastServices, localStorageService, config) {
 	$scope.input = {
 		username: "",
 		telephone: "",
@@ -41,6 +41,7 @@ angular.module("Transport").controller("signupController", function($scope, user
 		}).then(function(data) {
 			toastServices.hide()
 			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
+				$location.path("signin").replace();
 				errorServices.autoHide(data.message)
 			} else {
 				errorServices.autoHide(data.message);

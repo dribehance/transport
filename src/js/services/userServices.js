@@ -87,6 +87,18 @@ angular.module("Transport").factory("userServices", function($http, localStorage
 				return data.data;
 			});
 		},
+		create_address: function(input) {
+			return $http({
+				// by dribehance <dribehance.kksdapp.com>
+				url: config.url + "/mobile/UserCenter/addAddress",
+				method: "GET",
+				params: angular.extend({}, config.common_params, {
+					token: localStorageService.get("token")
+				}, input)
+			}).then(function(data) {
+				return data.data;
+			});
+		},
 		modify_userinfo: function(input) {
 			return $http({
 				// by dribehance <dribehance.kksdapp.com>
@@ -163,6 +175,30 @@ angular.module("Transport").factory("userServices", function($http, localStorage
 			return $http({
 				// by dribehance <dribehance.kksdapp.com>
 				url: config.url + "/mobile/CargoManage/itemRegisterList",
+				method: "GET",
+				params: angular.extend({}, config.common_params, {
+					token: localStorageService.get("token")
+				}, input)
+			}).then(function(data) {
+				return data.data;
+			});
+		},
+		query_merge_cargos: function(input) {
+			return $http({
+				// by dribehance <dribehance.kksdapp.com>
+				url: config.url + "/mobile/CargoManage/mergeCargo",
+				method: "GET",
+				params: angular.extend({}, config.common_params, {
+					token: localStorageService.get("token")
+				}, input)
+			}).then(function(data) {
+				return data.data;
+			});
+		},
+		query_orders: function(input) {
+			return $http({
+				// by dribehance <dribehance.kksdapp.com>
+				url: config.url + "/mobile/CargoManage/cargoList",
 				method: "GET",
 				params: angular.extend({}, config.common_params, {
 					token: localStorageService.get("token")

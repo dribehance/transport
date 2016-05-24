@@ -16,13 +16,19 @@
                 <input type="text" class="form-control full-width text-small" ng-model="input.wide" name="wide" required placeholder="請輸入寬度(數字)">
             </div>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-12">
             <div class="input-group">
                 <div class="input-label">高度(CM)</div>
                 <input type="text" class="form-control full-width text-small" ng-model="input.height" name="height" required placeholder="請輸入高度(數字)">
             </div>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-12">
+            <div class="input-group">
+                <div class="input-label">體積重(KG)</div>
+                <span class="text-primary">计算结果：{{input.cubic||'0.00'}}kg</span>
+            </div>
+        </div>
+        <div class="col-xs-12">
             <div class="input-group">
                 <div class="input-label">貨品重量(KG)</div>
                 <input type="text" class="form-control full-width text-small" ng-model="input.weight" name="weight" required placeholder="請輸入貨品重量(KG)">
@@ -31,16 +37,22 @@
         <div class="input-group">
             <div class="input-label">集運方式</div>
             <div class="clearfix text-center">
-                <label for="radio_1" class="col-xs-4" ng-class="{'text-primary':transport.way == 'self'}">
-                    <input type="radio" class="hide" id="radio_1" value="self" ng-model="transport.way"><i class="fa fa-circle-o"></i>自取</label>
-                <label for="radio_2" class="col-xs-4" ng-class="{'text-primary':transport.way == 'business'}">
-                    <input type="radio" class="hide" id="radio_2" value="business" ng-model="transport.way"><i class="fa fa-circle-o"></i>工商區</label>
-                <label for="radio_3" class="col-xs-4" ng-class="{'text-primary':transport.way == 'house'}">
-                    <input type="radio" class="hide" id="radio_3" value="house" ng-model="transport.way"><i class="fa fa-circle-o"></i>住宅區</label>
+                <label for="radio_1" class="col-xs-4" ng-class="{'text-primary':input.way == 'self'}">
+                    <input type="radio" class="hide" id="radio_1" value="self" ng-model="input.way"><i class="fa fa-circle-o"></i>自取</label>
+                <label for="radio_2" class="col-xs-4" ng-class="{'text-primary':input.way == 'business'}">
+                    <input type="radio" class="hide" id="radio_2" value="business" ng-model="input.way"><i class="fa fa-circle-o"></i>工商區</label>
+                <label for="radio_3" class="col-xs-4" ng-class="{'text-primary':input.way == 'house'}">
+                    <input type="radio" class="hide" id="radio_3" value="house" ng-model="input.way"><i class="fa fa-circle-o"></i>住宅區</label>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="input-group">
+                <div class="input-label">運費(RMB)</div>
+                <span class="text-primary">计算结果：{{input.rmb||'0.00'}}RMB</span>
             </div>
         </div>
     </div>
-    <div class="tab-bar bottom">
+    <!-- <div class="tab-bar bottom">
         <div class="tab-item multi-line">
             <div class="text-small">體積重：0.00KG</div>
             <div>運費：24.99RMB</div>
@@ -48,5 +60,5 @@
         <div class="tab-item">
             <span class="btn btn-primary full-width" type="submit" ng-disabled="calculatorForm.$invalid">確認</span>
         </div>
-    </div>
+    </div> -->
 </form>

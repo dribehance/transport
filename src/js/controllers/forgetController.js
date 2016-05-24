@@ -1,5 +1,5 @@
 // by dribehance <dribehance.kksdapp.com>
-angular.module("Transport").controller("forgetController", function($scope, userServices, errorServices, toastServices, localStorageService, config) {
+angular.module("Transport").controller("forgetController", function($scope, $rootScope, $timeout, userServices, errorServices, toastServices, localStorageService, config) {
 	$scope.input = {
 		telephone: "",
 		smscode: "",
@@ -31,7 +31,10 @@ angular.module("Transport").controller("forgetController", function($scope, user
 		}).then(function(data) {
 			toastServices.hide()
 			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
-				errorServices.autoHide(data.message)
+				errorServices.autoHide(data.message);
+				$timeout(function() {
+					$rootScope.back();
+				}, 1000)
 			} else {
 				errorServices.autoHide(data.message);
 			}

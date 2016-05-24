@@ -1,11 +1,21 @@
 // by dribehance <dribehance.kksdapp.com>
-angular.module("Transport").controller("servicesController", function($scope, userServices, errorServices, toastServices, localStorageService, config) {
+angular.module("Transport").controller("servicesController", function($scope, transportServices, userServices, errorServices, toastServices, localStorageService, config) {
 	$scope.services = {
 		state: "charge"
 	}
 	$scope.change = function(state) {
 		$scope.services.state = state;
 	};
+	// query fee 汇率
+	toastServices.show();
+	transportServices.query_calculator_constant().then(function(data) {
+		toastServices.hide()
+		if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
+			$scope.rate = data.rateModel.rate;
+		} else {
+			errorServices.autoHide(data.message);
+		}
+	});
 	// type:1 南洋商業銀行
 	$scope.charge = {
 		company: "Highway Technology Limited",
@@ -22,7 +32,7 @@ angular.module("Transport").controller("servicesController", function($scope, us
 			errorServices.autoHide("請輸入數字")
 			return;
 		}
-		$scope.charge.hkd = n * 1.2;
+		$scope.charge.hkd = new Number(n * $scope.rate).toFixed(2);
 	})
 	$scope.ajaxForm = function() {
 		toastServices.show();
@@ -69,7 +79,7 @@ angular.module("Transport").controller("servicesController", function($scope, us
 			return;
 		}
 		n = parseFloat(n);
-		$scope.askforpay.hkd = new Number(n * 1.2).toFixed(2);
+		$scope.askforpay.hkd = new Number(n * $scope.rate).toFixed(2);
 		$scope.askforpay.fee = new Number($scope.askforpay.hkd * 0.03).toFixed(2);
 		$scope.askforpay.total_hkd = new Number($scope.askforpay.hkd * (1 + 0.03)).toFixed(2);
 	})

@@ -1,8 +1,5 @@
 // by dribehance <dribehance.kksdapp.com>
 angular.module("Transport").controller("cargosController", function($scope, userServices, $location, errorServices, toastServices, localStorageService, config) {
-	$scope.merge = function() {
-		$location.path("/cargos_merge");
-	}
 	$scope.cargos = [];
 	$scope.page = {
 		pn: 1,
@@ -36,11 +33,29 @@ angular.module("Transport").controller("cargosController", function($scope, user
 		return ["未收貨", "已入倉", "集運中", "貨物配送完成"][status]
 	}
 	$scope.check = function(cargo) {
+		if (cargo.status == "0") {
+			return;
+		}
 		cargo.checked = !cargo.checked;
 	}
 	$scope.check_reverse = function() {
 		angular.forEach($scope.cargos, function(cargo) {
+			if (cargo.status == "0") {
+				return;
+			}
 			cargo.checked = !cargo.checked;
 		})
+	}
+	$scope.merge = function() {
+		var ids = "";
+		angular.forEach($scope.cargos, function(cargo) {
+			if (cargo.status == "0" || !cargo.checked) {
+				return;
+			}
+			ids += cargo.id + ",";
+		})
+		if (ids == "") return;
+		ids = ids.substring(0, ids.length - 1);
+		$location.path("/cargos_merge").search("ids", ids);
 	}
 })

@@ -22,7 +22,7 @@ angular.module("Transport").controller("addressController", function($scope, use
 				errorServices.autoHide("服务器错误");
 			}
 			if ($scope.no_more) {
-				$scope.page.message = "没有了";
+				$scope.page.message = "";
 			}
 			$scope.page.pn++;
 		})

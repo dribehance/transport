@@ -41,7 +41,7 @@ angular.module("Transport").factory("transportServices", function($http, config)
 				return data.data;
 			});
 		},
-		query_calculator_constant: function() {
+		query_calculator_constant: function(input) {
 			return $http({
 				// by dribehance <dribehance.kksdapp.com>
 				url: config.url + "/mobile/Home/fee",
@@ -65,6 +65,26 @@ angular.module("Transport").factory("transportServices", function($http, config)
 			return $http({
 				// by dribehance <dribehance.kksdapp.com>
 				url: config.url + "/mobile/Home/newsDetail",
+				method: "GET",
+				params: angular.extend({}, config.common_params, input)
+			}).then(function(data) {
+				return data.data;
+			});
+		},
+		query_self_address: function(input) {
+			return $http({
+				// by dribehance <dribehance.kksdapp.com>
+				url: config.url + "/mobile/CargoManage/getAddressList",
+				method: "GET",
+				params: angular.extend({}, config.common_params, input)
+			}).then(function(data) {
+				return data.data;
+			});
+		},
+		query_business_hour: function(input) {
+			return $http({
+				// by dribehance <dribehance.kksdapp.com>
+				url: config.url + "/mobile/CargoManage/getTimeList",
 				method: "GET",
 				params: angular.extend({}, config.common_params, input)
 			}).then(function(data) {

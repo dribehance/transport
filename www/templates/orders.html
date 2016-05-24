@@ -1,59 +1,42 @@
 <!-- header -->
 <dribehance-header title="'集運訂單'"></dribehance-header>
 <div class="list-group">
-    <div class="list-group-item clearfix">
+    <div class="list-group-item clearfix" ng-repeat="order in orders">
         <p class="clearfix">
-            單號：1463449524185 <span class="pull-right">未付款 <span class="text-primary">去付款</span></span>
+            單號：{{order.flow_number}} <span class="pull-right">{{get_status(order.status)}} <span class="text-primary" ng-if="order.status == 1">去付款</span></span>
         </p>
         <p class="clearfix" style="margin-bottom:5px">
-            <span class="col-xs-5">重量：3kg</span>
-            <span class="col-xs-7">服務：送貨上門</span>
+            <span class="col-xs-5">重量：{{order.weight}}kg</span>
+            <span class="col-xs-7">服務：{{get_server(order.server)}}</span>
         </p>
         <p class="clearfix" style="margin-bottom:5px">
-            <span class="col-xs-5">包裝費：14HKB</span>
-            <span class="col-xs-7">價格：<span class="text-primary">14HKB</span>(10RMB)</span>
+            <span class="col-xs-5">包裝費：{{order.bagging_fee}}HKB</span>
+            <span class="col-xs-7">價格：</br><span class="text-primary">{{order.HKD}}HKB</span>({{order.RMB}}RMB)</span>
         </p>
-        <p>創建時間：2016-03-06 15:30</p>
-        <div>自提/派送地址：Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto obcaecati dicta atque nihil, repellendus, sed dignissimos aut illum libero molestiae</div>
+        <p>創建時間：{{order.from_time}}</p>
+        <div>自提/派送地址：{{order.address}}</div>
         <div class="order-detail bg-gray-lighter" ng-if="order.id == preview_id">
-            <div class="cargo-item">
+            <div class="cargo-item" ng-repeat="cargo in order.iRModelList">
                 <div class="cargo-header clearfix">
-                    快遞編號：036569228
-                    <span class="pull-right">代入倉</span>
+                    快遞編號：{{cargo.express_number}}
+                    <span class="pull-right">{{get_status_1(cargo.status)}}</span>
                 </div>
                 <div class="cargo-content">
-                    <p>快遞公司：申通快遞</p>
-                    <p>備註：</p>
+                    <p>快遞公司：{{cargo.express_company}}</p>
+                    <p>備註：{{cargo.remarks}}</p>
                     <p class="clearfix">
-                        <span class="pull-left">公斤：3.0</span>
-                        <span class="pull-right">體重：5cmx6cmx8cm</span>
+                        <span class="pull-left">公斤：{{cargo.kg}}</span>
+                        <span class="pull-right">體重：{{cargo.weight_long}}cmx{{cargo.weight_wide}}cmx{{cargo.weight_height}}cm</span>
                     </p>
-                    <p>創建時間：2015-06-30 15:00</p>
-                </div>
-                <div class="cargo-action">
-                    <!-- <i class="fa fa-check-square-o"></i> -->
-                </div>
-            </div>
-            <div class="cargo-item">
-                <div class="cargo-header clearfix">
-                    快遞編號：036569228
-                    <span class="pull-right">代入倉</span>
-                </div>
-                <div class="cargo-content">
-                    <p>快遞公司：申通快遞</p>
-                    <p>備註：</p>
-                    <p class="clearfix">
-                        <span class="pull-left">公斤：3.0</span>
-                        <span class="pull-right">體重：5cmx6cmx8cm</span>
-                    </p>
-                    <p>創建時間：2015-06-30 15:00</p>
+                    <p>創建時間：{{cargo.post_time}}</p>
                 </div>
                 <div class="cargo-action">
                     <!-- <i class="fa fa-check-square-o"></i> -->
                 </div>
             </div>
         </div>
-        <div class="pull-right" ng-if="preview_id == ''" ng-click="preview(order.id)">點擊查看詳情</div>
-        <div class="pull-right" ng-if="preview_id != ''" ng-cick="hide(order.id)">收起詳情</div>
+        <div class="pull-right text-success" ng-if="preview_id == ''" ng-click="preview(order.id)">點擊查看詳情</div>
+        <div class="pull-right text-success" ng-if="preview_id != ''" ng-click="preview_hide(order.id)">收起詳情</div>
     </div>
+    <div class="section text-center" ng-click="loadMore()">{{page.message}}</div>
 </div>
