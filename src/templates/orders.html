@@ -1,5 +1,11 @@
 <!-- header -->
-<dribehance-header title="'集運訂單'"></dribehance-header>
+<div class="header">
+    <i class="fa fa-angle-left pull-left back-action" ng-click="back()"></i>
+    <a class="pull-right text-white extend-action" ng-href="#/search">查詢</a>
+    <span class="head-text">
+            集運訂單
+        </span>
+</div>
 <div class="list-group">
     <div class="list-group-item clearfix" ng-repeat="order in orders">
         <p class="clearfix">

@@ -1,0 +1,21 @@
+<!-- header -->
+<dribehance-header title="'訂單查詢'"></dribehance-header>
+<div class="wrap">
+	<form class="account-section" name="searchForm" ng-submit="ajaxForm()">
+        <div class="input-group">
+            <div class="input-label">流水單號</div>
+            <input type="text" class="form-control full-width" ng-model="input.flow_id" placeholder="請輸入流水單號">
+        </div>
+        <div class="input-group">
+            <div class="input-label">開始</div>
+            <input type="text" class="form-control full-width" ng-model="input.start" onClick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2008-03-08 11:30:00',maxDate:'2100-03-10 20:59:30'})" name="start" readonly="" placeholder="請選擇">
+        </div>
+        <div class="input-group">
+            <div class="input-label">結束</div>
+            <input type="text" class="form-control full-width" ng-model="input.start" onClick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'2008-03-08 11:30:00',maxDate:'2100-03-10 20:59:30'})" name="end" readonly="" placeholder="請選擇">
+        </div>
+        <div class="input-group">
+            <button class="btn btn-primary full-width btn-lg" ng-disabled="searchForm.$invalid">確認</button>
+        </div>
+    </form>
+</div>

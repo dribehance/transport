@@ -37,6 +37,7 @@ angular.module("Transport").constant("config", {
 		"services",
 		"signin",
 		"signup",
+		"search",
 		"teaching",
 		"tiaokuan",
 		"remarks",

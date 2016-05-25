@@ -1,5 +1,5 @@
 // by dribehance <dribehance.kksdapp.com>
-angular.module("Transport").controller("ordersController", function($scope, userServices, errorServices, toastServices, localStorageService, config) {
+angular.module("Transport").controller("ordersController", function($scope, $routeParams, $location, userServices, errorServices, toastServices, localStorageService, config) {
 	$scope.preview_id = "";
 	$scope.preview = function(id) {
 		$scope.preview_id = id;
@@ -11,7 +11,10 @@ angular.module("Transport").controller("ordersController", function($scope, user
 	$scope.page = {
 		pn: 1,
 		page_size: 10,
-		message: "点击加载更多"
+		message: "点击加载更多",
+		flow_number: $routeParams.flow_id,
+		start_day: $routeParams.start,
+		end_day: $routeParams.end
 	}
 	$scope.loadMore = function() {
 		if ($scope.no_more) {
