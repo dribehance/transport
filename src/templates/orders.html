@@ -9,7 +9,7 @@
 <div class="list-group">
     <div class="list-group-item clearfix" ng-repeat="order in orders">
         <p class="clearfix">
-            單號：{{order.flow_number}} <span class="pull-right">{{get_status(order.status)}} <span class="text-primary" ng-if="order.status == 1">去付款</span></span>
+            單號：{{order.flow_number}} <span class="pull-right">{{get_status(order.status)}} <span class="text-primary" ng-if="order.status == 1" ng-click="payment(order.id)">去付款</span></span>
         </p>
         <p class="clearfix" style="margin-bottom:5px">
             <span class="col-xs-5">重量：{{order.weight}}kg</span>

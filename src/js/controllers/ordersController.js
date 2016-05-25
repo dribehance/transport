@@ -48,4 +48,7 @@ angular.module("Transport").controller("ordersController", function($scope, $rou
 	$scope.get_status_1 = function(status) {
 		return ["未收貨", "已入倉", "集運中", "已配送完"][status];
 	}
+	$scope.payment = function(id) {
+		$location.path("payment").search("id", id);
+	}
 })

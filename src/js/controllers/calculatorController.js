@@ -2,10 +2,10 @@
 angular.module("Transport").controller("calculatorController", function($scope, transportServices, errorServices, toastServices, localStorageService, config) {
 	$scope.input = {
 		way: "self",
-		long: "0",
-		wide: "0",
-		height: "0",
-		weight: "0"
+		long: "",
+		wide: "",
+		height: "",
+		weight: ""
 	};
 	// query fee 汇率
 	toastServices.show();
@@ -23,7 +23,6 @@ angular.module("Transport").controller("calculatorController", function($scope, 
 			return;
 		}
 		$scope.input.cubic = (parseFloat($scope.input.long) * parseFloat($scope.input.wide) * parseFloat($scope.input.height) / 6000).toFixed(2);
-		console.log($scope.input.cubic)
 		if ($scope.input.cubic == "NaN") {
 			$scope.input.cubic = 0;
 		}

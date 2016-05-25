@@ -6,7 +6,7 @@ angular.module("Transport").directive('banner', function() {
 		template: "<div class='carousel-holder owl-carousel theme' ng-transclude></div>",
 		link: function(scope, element, attrs) {
 			var options = {
-				autoPlay: 5000,
+				autoplay: true,
 				items: 1,
 				// pagination: true
 			}

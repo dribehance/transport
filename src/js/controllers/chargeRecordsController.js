@@ -28,5 +28,8 @@ angular.module("Transport").controller("chargeRecordsController", function($scop
 		})
 
 	}
+	$scope.get_status = function(status) {
+		return ["删除", "未審批", "已完成"][status];
+	}
 	$scope.loadMore();
 })
