@@ -40,12 +40,9 @@ angular.module("Transport").controller("ordersController", function($scope, user
 		return ["自取", "送貨上門"][server];
 	}
 	$scope.get_status = function(status) {
-		if (status == "-1") {
-			status = 0;
-		}
-		return ["刪除", "未付款", "打包中", "已發貨", "已簽收"][status];
+		return ["未處理", "未付款", "打包中", "已發貨", "已簽收"][status];
 	}
 	$scope.get_status_1 = function(status) {
-		return ["未收貨", "已入倉", "集運中", "已配送"][status];
+		return ["未收貨", "已入倉", "集運中", "已配送完"][status];
 	}
 })

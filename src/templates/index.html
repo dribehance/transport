@@ -6,62 +6,62 @@
     <a ng-href="#/account" class="grid-item">
         <img ng-src="images/mp1.jpg" class="grid-img" alt="">
         <span class="grid-title block">
-				我的集運
-			</span>
+                我的集運
+            </span>
     </a>
     <a ng-href="#/cargo" class="grid-item">
         <img ng-src="images/mp2.jpg" class="grid-img" alt="">
         <span class="grid-title block">
-				我要集運
-			</span>
+                我要集運
+            </span>
     </a>
     <a ng-href="#/orders" class="grid-item">
         <img ng-src="images/mp3.jpg" class="grid-img" alt="">
         <span class="grid-title block">
-				集運訂單
-			</span>
+                集運訂單
+            </span>
     </a>
     <a ng-href="#/services" class="grid-item">
         <img ng-src="images/mp4.jpg" class="grid-img" alt="">
         <span class="grid-title block">
-				我要服務
-			</span>
+                我要服務
+            </span>
     </a>
     <a ng-href="#/calculator" class="grid-item">
         <img ng-src="images/mp5.jpg" class="grid-img" alt="">
         <span class="grid-title block">
-				計算器
-			</span>
+                計算器
+            </span>
     </a>
     <a ng-href="#/cost" class="grid-item">
         <img ng-src="images/mp6.jpg" class="grid-img" alt="">
         <span class="grid-title block">
-				收費價錢
-			</span>
+                收費價錢
+            </span>
     </a>
     <a ng-href="#/question" class="grid-item">
         <img ng-src="images/mp7.jpg" class="grid-img" alt="">
         <span class="grid-title block">
-				常見問題
-			</span>
+                常見問題
+            </span>
     </a>
     <a ng-href="#/infos" class="grid-item">
         <img ng-src="images/mp8.jpg" class="grid-img" alt="">
         <span class="grid-title block">
-				最新消息
-			</span>
+                最新消息
+            </span>
     </a>
     <a ng-href="#/about" class="grid-item">
         <img ng-src="images/mp9.jpg" class="grid-img" alt="">
         <span class="grid-title block">
-				公司介紹
-			</span>
+                公司介紹
+            </span>
     </a>
     <a ng-href="#/teaching" class="grid-item">
         <img ng-src="images/mp10.jpg" class="grid-img" alt="">
         <span class="grid-title block">
-				集運教學
-			</span>
+                集運教學
+            </span>
     </a>
 </div>
 <div class="footer" ng-controller="signinController">
@@ -70,10 +70,14 @@
             <a class="col-xs-4 block" ng-href="#/contact">聯繫我們</a>
             <a class="col-xs-4 block" ng-href="#/signin" ng-if="!is_signin()">登錄</a>
             <a class="col-xs-4 block" ng-href="#/signup" ng-if="!is_signin()">註冊</a>
-            <a class="col-xs-4 block" ng-href="#/me_info" ng-if="is_signin()">個人資料</a>
+            <a class="col-xs-4 block" ng-href="#/me_info" ng-if="is_signin()">个人资料</a>
             <a class="col-xs-4 block" ng-click="logout()" ng-if="is_signin()">註銷</a>
         </div>
         <div class="copyright text-center">
+            <div class="col-xs-6 text-center"><a href="#/remarks">集運備註</a></div>
+            <div class="col-xs-6 text-center"><a href="#/tiaokuan">條款細則</a></div>
+            <div class="col-xs-6 text-center"><a href="#/transport_scope">無法派送範圍</a></div>
+            <p class="col-xs-6 text-center"><a href="#/tiaoyue">承運契約條款</a></p>
             Copyright © 2014-2015 咇咇集运bibicargo.com 版權所有
         </div>
     </div>

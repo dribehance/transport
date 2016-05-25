@@ -1,6 +1,10 @@
 <!-- header -->
 <dribehance-header title="'合併貨物'"></dribehance-header>
 <div class="list-group has-bottom">
+    <div class="text-center bg-warning" style="padding:8px;">
+        <div class="text-larger text-primary">运费</div>
+        <div class="text-larger text-primary">{{input.rmb}} <span class="text-small">RMB</span> /{{input.hkd}} <span class="text-small">HKD</span></div>
+    </div>
     <div class="list-group-item">
         <div class="input-group clearfix">
             <div class="input-label">
@@ -101,9 +105,8 @@
     </div>
 </div>
 <div class="tab-bar bottom">
-    <div class="tab-item multi-line">
-        <div class="text-small">运费</div>
-        <div class="text-small">{{input.rmb}}RMB/{{input.hkd}}HKD</div>
+    <div class="tab-item">
+        <div class="text-white">體積重：{{get_weight()}}kg</div>
     </div>
     <div class="tab-item">
         <span class="btn btn-primary full-width" ng-click="merge()">確認</span>

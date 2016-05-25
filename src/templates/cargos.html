@@ -4,7 +4,7 @@
 	<div class="cargo-item" ng-repeat="cargo in cargos" ng-class="{'text-primary':cargo.checked}" ng-click="check(cargo)">
 		<div class="cargo-header clearfix">
 			快遞編號：{{cargo.express_number}}
-			<span class="pull-right">{{get_status(cargo.status)}}</span>
+			<span class="pull-right">{{get_status(cargo.item_type)}}</span>
 		</div>
 		<div class="cargo-content">
 			<p>快遞公司：{{cargo.express_company}}</p>
@@ -16,7 +16,7 @@
 			<p>創建時間：{{cargo.post_time}}</p>
 		</div>
 		<div class="cargo-action">
-			<i class="fa fa-check-square-o"></i>
+			<i class="fa" ng-if="cargo.item_type != 0" ng-class="{'fa-check-square-o':cargo.checked,'fa-square-o':!cargo.checked}"></i>
 		</div>
 	</div>
 	<div class="btn text-center full-width" ng-click="loadMore()">{{page.message}}</div>

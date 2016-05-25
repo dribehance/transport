@@ -1,5 +1,5 @@
 // by dribehance <dribehance.kksdapp.com>
-angular.module("Transport").controller("paymentController", function($scope, $routeParams, $rootScope, $timeout, userServices, errorServices, toastServices, localStorageService, config) {
+angular.module("Transport").controller("paymentController", function($scope, $location, $routeParams, $rootScope, $timeout, userServices, errorServices, toastServices, localStorageService, config) {
 	$scope.input = {
 		order_id: ""
 	}
@@ -13,7 +13,7 @@ angular.module("Transport").controller("paymentController", function($scope, $ro
 			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
 				errorServices.autoHide(data.message);
 				$timeout(function() {
-					$rootScope.back();
+					$location.path("orders").replace();
 				}, 1000)
 			} else {
 				errorServices.autoHide(data.message);

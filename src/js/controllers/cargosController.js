@@ -30,17 +30,17 @@ angular.module("Transport").controller("cargosController", function($scope, user
 	}
 	$scope.loadMore();
 	$scope.get_status = function(status) {
-		return ["未收貨", "已入倉", "集運中", "貨物配送完成"][status]
+		return ["未收貨", "已入倉", "貨物配送完成"][status]
 	}
 	$scope.check = function(cargo) {
-		if (cargo.status == "0") {
+		if (cargo.item_type == "0") {
 			return;
 		}
 		cargo.checked = !cargo.checked;
 	}
 	$scope.check_reverse = function() {
 		angular.forEach($scope.cargos, function(cargo) {
-			if (cargo.status == "0") {
+			if (cargo.item_type == "0") {
 				return;
 			}
 			cargo.checked = !cargo.checked;
@@ -49,7 +49,7 @@ angular.module("Transport").controller("cargosController", function($scope, user
 	$scope.merge = function() {
 		var ids = "";
 		angular.forEach($scope.cargos, function(cargo) {
-			if (cargo.status == "0" || !cargo.checked) {
+			if (cargo.item_type == "0" || !cargo.checked) {
 				return;
 			}
 			ids += cargo.id + ",";

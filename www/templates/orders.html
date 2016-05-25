@@ -19,7 +19,7 @@
             <div class="cargo-item" ng-repeat="cargo in order.iRModelList">
                 <div class="cargo-header clearfix">
                     快遞編號：{{cargo.express_number}}
-                    <span class="pull-right">{{get_status_1(cargo.status)}}</span>
+                    <span class="pull-right">{{get_status_1(cargo.item_type)}}</span>
                 </div>
                 <div class="cargo-content">
                     <p>快遞公司：{{cargo.express_company}}</p>
@@ -35,8 +35,8 @@
                 </div>
             </div>
         </div>
-        <div class="pull-right text-success" ng-if="preview_id == ''" ng-click="preview(order.id)">點擊查看詳情</div>
-        <div class="pull-right text-success" ng-if="preview_id != ''" ng-click="preview_hide(order.id)">收起詳情</div>
+        <div class="pull-right text-success" ng-click="preview(order.id)">點擊查看詳情</div>
+        <!-- <div class="pull-right text-success" ng-if="preview_id != ''" ng-click="preview_hide(order.id)">收起詳情</div> -->
     </div>
     <div class="section text-center" ng-click="loadMore()">{{page.message}}</div>
 </div>
