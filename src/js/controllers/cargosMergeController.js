@@ -30,7 +30,7 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 		angular.forEach($scope.cargos, function(cargo) {
 			weight += parseFloat(cargo.kg);
 		})
-		return weight;
+		return weight.toFixed(2);
 	};
 	// self address
 	toastServices.show();
