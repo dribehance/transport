@@ -8,7 +8,8 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 		payment: "",
 		preview: "hide",
 		business_hour: "",
-		rmb: ""
+		rmb: "",
+		hkd: ""
 	}
 	toastServices.show();
 	userServices.query_merge_cargos({
@@ -31,10 +32,6 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 		})
 		return weight;
 	};
-	$scope.get_fee = function() {
-
-		return 0;
-	};
 	// self address
 	toastServices.show();
 	transportServices.query_self_address({
@@ -44,10 +41,17 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 		if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
 			$scope.addresses = data.AddressList;
 			$scope.input.address = $scope.addresses[0];
+			$scope.query_business_hour();
 		} else {
 			errorServices.autoHide(data.message);
 		}
-	}).then(function() {
+	});
+	$scope.$watch("input.address", function(n, o) {
+		if (n === o) return;
+		$scope.query_business_hour();
+	});
+	// query business hour
+	$scope.query_business_hour = function() {
 		// business hour
 		transportServices.query_business_hour({
 			take_places: $scope.input.address.address_get
@@ -55,17 +59,23 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 			toastServices.hide()
 			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
 				$scope.business_hours = data.Result.TimeList;
-				$scope.business_hours = $scope.business_hours[0];
+				$scope.input.business_hour = $scope.business_hours[0];
 			} else {
 				errorServices.autoHide(data.message);
 			}
 		})
-	});
+	};
 	// payment
 	var payments_1 = ["支付寶轉賬", "淘寶拍下，付款", "中國銀行，轉賬", "恒生銀行，轉賬"],
 		payments_2 = ["貨到付款(只限自營自取點)", "支付寶轉賬", "淘寶拍下，付款", "中國銀行，轉賬", "恒生銀行，轉賬"];
-	$scope.payments = payments_1;
-	$scope.input.payment = $scope.payments[0];
+	$scope.$watch("input.business_hour", function(n, o) {
+		if (n.type == "0") {
+			$scope.payments = payments_1;
+		} else {
+			$scope.payments = payments_2;
+		}
+		$scope.input.payment = $scope.payments[0];
+	});
 	// query travel address 
 	$scope.travel_addresses = [];
 	$scope.page = {
@@ -107,7 +117,7 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 	transportServices.query_calculator_constant().then(function(data) {
 		toastServices.hide()
 		if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
-			$scope.rate = data.rateModel;
+			$scope.rate = data.rateModel.rate;
 			$scope.fee = data.feeModel;
 		} else {
 			errorServices.autoHide(data.message);
@@ -134,6 +144,7 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 			} else {
 				$scope.input.rmb = $scope.fee.firstget + (Math.ceil(n) - 1) * $scope.fee.lastget;
 			}
+			$scope.input.hkd = ($scope.input.rmb * $scope.rate).toFixed(2);
 		}
 		$scope.calculate_by_business = function(n) {
 			if (n < $scope.fee.lastsend_kg) {
@@ -141,6 +152,7 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 			} else {
 				$scope.input.rmb = $scope.fee.firstsend + (Math.ceil(n) - 1) * $scope.fee.lastsend;
 			}
+			$scope.input.hkd = ($scope.input.rmb * $scope.rate).toFixed(2);
 		}
 		$scope.calculate_by_house = function(n) {
 			if (n < $scope.fee.lastsend_kg) {
@@ -148,12 +160,81 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 			} else {
 				$scope.input.rmb = $scope.fee.firstsend + (Math.ceil(n) - 1) * $scope.fee.lastsend + $scope.fee.additionalFee;
 			}
+			$scope.input.hkd = ($scope.input.rmb * $scope.rate).toFixed(2);
 		}
 		$scope.$watch("input.way", function(n, o) {
 			$scope.calculate();
+			$scope.payments = payments_1;
+			$scope.input.payment = $scope.payments[0];
+			$scope.business_hours = [{
+				"address_get": "",
+				"time_get": "星期一至五上午",
+				"type": 0,
+				"post_time": "",
+				"status": 1
+			}, {
+				"address_get": "",
+				"time_get": "星期一至五下午",
+				"type": 0,
+				"post_time": "",
+				"status": 1
+			}, {
+				"address_get": "",
+				"time_get": "星期六日上午",
+				"type": 0,
+				"post_time": "",
+				"status": 1
+			}, {
+				"address_get": "",
+				"time_get": "星期六日下午",
+				"type": 0,
+				"post_time": "",
+				"status": 1
+			}];
+			$scope.input.business_hour = $scope.business_hours[0];
 		});
 		$scope.$watch("input.address_type", function(n, o) {
 			$scope.calculate();
 		})
-	})
+	});
+	// merge action
+	$scope.merge = function() {
+		toastServices.show();
+		var jiyunType, address_type;
+		if ($scope.input.way == "self") {
+			jiyunType = 0;
+			address_type = -1;
+		} else {
+			jiyunType = 1;
+		}
+		if ($scope.input.way == "travel" && $scope.input.address_type == 'business') {
+			address_type = 0;
+		}
+		if ($scope.input.way == "travel" && $scope.input.address_type == 'house') {
+			address_type = 1;
+		}
+		userServices.merge_cargos({
+			jiyunType: jiyunType,
+			addressType: address_type,
+			ids: $routeParams.ids,
+			take_places: $scope.input.address.address_get,
+			send_time_ziqu: $scope.input.business_hour.time_get,
+			send_time_paisong: $scope.input.business_hour.time_get,
+			pay_type: $scope.input.payment,
+			weight: $scope.get_weight(),
+			HKD: $scope.input.hkd,
+			RMB: $scope.input.rmb
+		}).then(function(data) {
+			toastServices.hide()
+			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
+				if ($scope.input.way == "self") {
+					$location.path("payment").search("id", data.cargo_id).replace();
+				} else {
+					$location.path("orders").replace();
+				}
+			} else {
+				errorServices.autoHide(data.message);
+			}
+		})
+	}
 })

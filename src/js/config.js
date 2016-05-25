@@ -32,6 +32,7 @@ angular.module("Transport").constant("config", {
 		"order",
 		"orders",
 		"privacy",
+		"payment",
 		"question",
 		"services",
 		"signin",

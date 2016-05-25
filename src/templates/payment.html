@@ -1,0 +1,32 @@
+<!-- header -->
+<dribehance-header title="'已完成集運'"></dribehance-header>
+<div class="list-group">
+    <form class="list-group-item" name="paymentForm" ng-submit="ajaxForm()">
+        <div class="input-group">
+            <div class="input-label">
+                1)淘寶拍下<a class="text-larger text-primary" ng-href="https://shop144308927.world.taobao.com/?spm=a313o.7775905.1998679131.d0011.cSUbGO">鏈接去淘寶網</a>
+            </div>
+            <input type="text" class="form-control full-width" ng-model="input.order_id" required placeholder="輸入淘寶訂單號">
+        </div>
+        <div class="input-group">
+        	<button class="btn btn-primary full-width" type="submit" ng-disabled="paymentForm.$invalid">確認</button>
+        </div>
+    </form>
+    <div class="list-group-item">
+        2)銀行轉賬
+    </div>
+    <div class="list-group-item" ng-repeat="bank in banks">
+        <div>銀行：{{bank.bank_name}}</div>
+        <div>卡號：{{bank.bank_no}}</div>
+        <div>賬戶：{{bank.bank_enter_name}}</div>
+    </div>
+    <div class="list-group-item">
+        <div class="input-group">
+            <div class="input-label">
+                3)支付寶轉賬<a class="text-larger text-primary" ng-href="https://shop144308927.world.taobao.com/?spm=a313o.7775905.1998679131.d0011.cSUbGO&qq-pf-to=pcqq.discussion">鏈接去支付寶</a>
+            </div>
+            <p>支付寶帳號 :852-52285725名: *瑋鴻</p>
+            (請將收據Whatsapp客服人員作為核對)
+        </div>
+    </div>
+</div>

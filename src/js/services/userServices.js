@@ -195,6 +195,18 @@ angular.module("Transport").factory("userServices", function($http, localStorage
 				return data.data;
 			});
 		},
+		merge_cargos: function(input) {
+			return $http({
+				// by dribehance <dribehance.kksdapp.com>
+				url: config.url + "/mobile/CargoManage/addCargo",
+				method: "GET",
+				params: angular.extend({}, config.common_params, {
+					token: localStorageService.get("token")
+				}, input)
+			}).then(function(data) {
+				return data.data;
+			});
+		},
 		query_orders: function(input) {
 			return $http({
 				// by dribehance <dribehance.kksdapp.com>
@@ -206,6 +218,30 @@ angular.module("Transport").factory("userServices", function($http, localStorage
 			}).then(function(data) {
 				return data.data;
 			});
-		}
+		},
+		bind_to_taobao: function(input) {
+			return $http({
+				// by dribehance <dribehance.kksdapp.com>
+				url: config.url + "/mobile/CargoManage/updateOrderNo",
+				method: "GET",
+				params: angular.extend({}, config.common_params, {
+					token: localStorageService.get("token")
+				}, input)
+			}).then(function(data) {
+				return data.data;
+			});
+		},
+		query_transfer: function(input) {
+			return $http({
+				// by dribehance <dribehance.kksdapp.com>
+				url: config.url + "/mobile/CargoManage/bankList",
+				method: "GET",
+				params: angular.extend({}, config.common_params, {
+					token: localStorageService.get("token")
+				}, input)
+			}).then(function(data) {
+				return data.data;
+			});
+		},
 	}
 });
