@@ -26,6 +26,7 @@ angular.module("Transport").controller("calculatorController", function($scope, 
 		if ($scope.input.cubic == "NaN") {
 			$scope.input.cubic = 0;
 		}
+		$scope.input.weight = $scope.input.cubic;
 	});
 	$scope.$watch("input.wide", function(n, o) {
 		if (n === o || n === undefined || n == "") {
@@ -35,6 +36,7 @@ angular.module("Transport").controller("calculatorController", function($scope, 
 		if ($scope.input.cubic == "NaN") {
 			$scope.input.cubic = 0;
 		}
+		$scope.input.weight = $scope.input.cubic;
 	})
 	$scope.$watch("input.height", function(n, o) {
 		if (n === o || n === undefined || n == "") {
@@ -44,6 +46,7 @@ angular.module("Transport").controller("calculatorController", function($scope, 
 		if ($scope.input.cubic == "NaN") {
 			$scope.input.cubic = 0;
 		}
+		$scope.input.weight = $scope.input.cubic;
 	})
 	$scope.$watch("input.weight", function(n, o) {
 		if (n === o || n === undefined || n == "") {
@@ -58,6 +61,9 @@ angular.module("Transport").controller("calculatorController", function($scope, 
 		$scope.calculate();
 	})
 	$scope.calculate = function() {
+		if ($scope.input.weight == 0 || $scope.input.weight == "" || $scope.input.weight == undefined) {
+			return;
+		}
 		if ($scope.input.way == "self") {
 			$scope.calculate_by_self($scope.input.weight);
 			return
