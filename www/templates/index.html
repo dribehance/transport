@@ -2,7 +2,22 @@
 <banner data-rate="1101/382">
     <imageview data-rate="1101/382" ng-repeat="banner in banners" src="staticImageUrl+banner.cover" on-repeat-done alt=""></imageview>
 </banner>
+<div class="wrap" ng-if="is_signin()">
+    當前登錄會員賬號：{{user.telephone}}
+</div>
 <div class="grid">
+    <a ng-href="#/infos" class="grid-item">
+        <img ng-src="images/mp8.jpg" class="grid-img" alt="">
+        <span class="grid-title block">
+                最新消息
+            </span>
+    </a>
+    <a ng-href="#/contact" class="grid-item">
+        <img ng-src="images/mp9.jpg" class="grid-img" alt="">
+        <span class="grid-title block text-ellipsis">
+                收貨地址及聯繫我們
+            </span>
+    </a>
     <a ng-href="#/account" class="grid-item">
         <img ng-src="images/mp1.jpg" class="grid-img" alt="">
         <span class="grid-title block">
@@ -45,18 +60,6 @@
                 常見問題
             </span>
     </a>
-    <a ng-href="#/infos" class="grid-item">
-        <img ng-src="images/mp8.jpg" class="grid-img" alt="">
-        <span class="grid-title block">
-                最新消息
-            </span>
-    </a>
-    <a ng-href="#/about" class="grid-item">
-        <img ng-src="images/mp9.jpg" class="grid-img" alt="">
-        <span class="grid-title block">
-                公司介紹
-            </span>
-    </a>
     <a ng-href="#/teaching" class="grid-item">
         <img ng-src="images/mp10.jpg" class="grid-img" alt="">
         <span class="grid-title block">
@@ -67,7 +70,7 @@
 <div class="footer" ng-controller="signinController">
     <div class="wrap">
         <div class="section text-center">
-            <a class="col-xs-4 block" ng-href="#/contact">聯繫我們</a>
+            <a class="col-xs-4 block" ng-href="#/about">公司介紹</a>
             <a class="col-xs-4 block" ng-href="#/signin" ng-if="!is_signin()">登錄</a>
             <a class="col-xs-4 block" ng-href="#/signup" ng-if="!is_signin()">註冊</a>
             <a class="col-xs-4 block" ng-href="#/me_info" ng-if="is_signin()">个人资料</a>

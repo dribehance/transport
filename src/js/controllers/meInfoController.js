@@ -4,22 +4,22 @@ angular.module("Transport").controller("meInfoController", function($scope, $roo
 	userServices.query_userinfo().then(function(data) {
 		toastServices.hide()
 		if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
-			$scope.user = data.Result.UserInfo;
-			$scope.user.new_email = $scope.user.email;
+			$rootScope.user = data.Result.UserInfo;
+			$rootScope.user.new_email = $rootScope.user.email;
 		} else {
 			errorServices.autoHide(data.message);
 		}
 	})
 	$scope.ajaxForm = function() {
-		if ($scope.user.password_1 != $scope.user.password_2) {
+		if ($rootScope.user.password_1 != $rootScope.user.password_2) {
 			errorServices.autoHide("兩次輸入的密碼不一致");
 			return;
 		}
 		toastServices.show();
 		userServices.modify_userinfo({
-			nickname: $scope.user.nickname,
-			password: $scope.user.password_1,
-			email: $scope.user.new_email
+			nickname: $rootScope.user.nickname,
+			password: $rootScope.user.password_1,
+			email: $rootScope.user.new_email
 		}).then(function(data) {
 			toastServices.hide()
 			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {

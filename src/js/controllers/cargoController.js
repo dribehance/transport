@@ -3,7 +3,7 @@ angular.module("Transport").controller("cargoController", function($scope, userS
 	$scope.input = {
 		number: "",
 		company: "申通快遞",
-		companys: ["申通快遞", "中通快遞", "順豐快遞"],
+		companys: ["申通快遞", "EMS郵政", "順豐快遞", "圓通快遞", "中通快遞", "韻達快遞", "天天快遞", "百世匯通", "優速快遞", "德邦物流", "全峰快遞", "信豐物流", "國通快遞", "快捷速遞", "宅急送速遞", "聯昊通快遞", "其他"],
 		tag: "",
 		remarks: ""
 	}

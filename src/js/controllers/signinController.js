@@ -19,10 +19,10 @@ angular.module("Transport").controller("signinController", function($scope, $roo
 			}
 		})
 	}
-	$scope.is_signin = function() {
+	$rootScope.is_signin = function() {
 		return localStorageService.get("token") ? true : false;
 	}
-	$scope.logout = function() {
+	$rootScope.logout = function() {
 		localStorageService.remove("token");
 	}
 })
