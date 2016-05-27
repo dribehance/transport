@@ -10,13 +10,15 @@ angular.module("Transport").controller("indexController", function($scope, $root
 		}
 	})
 	toastServices.show();
-	userServices.query_userinfo().then(function(data) {
-		toastServices.hide()
-		if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
-			$rootScope.user = data.Result.UserInfo;
-			$rootScope.user.new_email = $rootScope.user.email;
-		} else {
-			errorServices.autoHide(data.message);
-		}
-	})
+	if (localStorageService.get("token")) {
+		userServices.query_userinfo().then(function(data) {
+			toastServices.hide()
+			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
+				$rootScope.user = data.Result.UserInfo;
+				$rootScope.user.new_email = $rootScope.user.email;
+			} else {
+				errorServices.autoHide(data.message);
+			}
+		})
+	}
 })
