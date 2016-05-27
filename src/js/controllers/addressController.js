@@ -1,5 +1,5 @@
 // by dribehance <dribehance.kksdapp.com>
-angular.module("Transport").controller("addressController", function($scope, userServices, errorServices, toastServices, localStorageService, config) {
+angular.module("Transport").controller("addressController", function($scope, $route, userServices, errorServices, toastServices, localStorageService, config) {
 	$scope.addresses = [];
 	$scope.page = {
 		pn: 1,
@@ -30,6 +30,7 @@ angular.module("Transport").controller("addressController", function($scope, use
 	}
 	$scope.loadMore();
 	$scope.open = function(id) {
+		$scope.remove_id = id;
 		$.magnificPopup.open({
 			items: {
 				src: '#popup'
@@ -40,8 +41,8 @@ angular.module("Transport").controller("addressController", function($scope, use
 	$scope.cancel = function() {
 		$.magnificPopup.close();
 	}
-	$scope.confirm = function(id) {
-		$scope.remove(id);
+	$scope.confirm = function() {
+		$scope.remove($scope.remove_id);
 		$.magnificPopup.close();
 	}
 	$scope.remove = function(id) {
@@ -51,6 +52,7 @@ angular.module("Transport").controller("addressController", function($scope, use
 		}).then(function(data) {
 			toastServices.hide()
 			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
+				$route.reload();
 				errorServices.autoHide(data.message)
 			} else {
 				errorServices.autoHide(data.message);

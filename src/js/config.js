@@ -1,5 +1,5 @@
 angular.module("Transport").constant("config", {
-	url: "http://203.88.161.147",
+	url: "http://www.bibicargo.com",
 	imageUrl: "http://www.bibicargo.com/files/image?name=",
 	request: {
 		"SUCCESS": "200",
