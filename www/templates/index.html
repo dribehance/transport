@@ -3,7 +3,7 @@
     <imageview data-rate="1101/382" ng-repeat="banner in banners" src="staticImageUrl+banner.cover" on-repeat-done alt=""></imageview>
 </banner>
 <div class="wrap" ng-if="is_signin()">
-    當前登錄會員賬號：{{user.telephone}}
+     當前登錄會員編號：{{user.id}}&nbsp;&nbsp;&nbsp;&nbsp;{{user.nickname}}
 </div>
 <div class="grid">
     <a ng-href="#/infos" class="grid-item">
@@ -48,7 +48,7 @@
                 計算器
             </span>
     </a>
-    <a ng-href="#/cost" class="grid-item">
+    <a href="http://www.bibicargo.com/Mobile/cost" class="grid-item">
         <img ng-src="images/mp6.jpg" class="grid-img" alt="">
         <span class="grid-title block">
                 收費價錢

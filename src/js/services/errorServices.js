@@ -23,8 +23,9 @@ angular.module("Transport").factory("errorServices", function($rootScope, $timeo
 			toastServices.hide();
 			// tip error
 			switch (status) {
+				case -1:
 				case 0:
-					this.autoHide("连接超时");
+					this.autoHide("網絡連接超時");
 					break;
 				case 500:
 				case 501:
@@ -36,7 +37,7 @@ angular.module("Transport").factory("errorServices", function($rootScope, $timeo
 				case 507:
 				case 509:
 				case 510:
-					this.autoHide("服务器连接出错");
+					this.autoHide("服務器連接出錯");
 					break;
 				default:
 					;

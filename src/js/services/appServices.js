@@ -1,6 +1,6 @@
  // by dribehance <dribehance.kksdapp.com>
  // EventHandle
- angular.module("Transport").factory("appServices", function($rootScope, $window, $location, errorServices, toastServices, config) {
+ angular.module("Transport").factory("appServices", function($rootScope, $window, $location, errorServices, localStorageService, toastServices, config) {
  	var routeChangeStart = function(e) {
  		// do something white routechangestart,eg:
  		// toastServices.show();
@@ -33,6 +33,12 @@
  			}
  			$rootScope.back = function() {
  				$window.history.back();
+ 			}
+ 			$rootScope.is_signin = function() {
+ 				return localStorageService.get("token") ? true : false;
+ 			}
+ 			$rootScope.logout = function() {
+ 				localStorageService.remove("token");
  			}
  			$rootScope.staticImageUrl = config.imageUrl;
  		}

@@ -39,6 +39,7 @@ angular.module("Transport", [
 		delete $httpProvider.defaults.headers.common["X-Requested-With"];
 		localStorageServiceProvider.setStorageCookie(1 / 50);
 		$httpProvider.interceptors.push('tokenInterceptor');
+		$httpProvider.interceptors.push('timeoutHttpInterceptor');
 
 	}).run(function(appServices) {
 		// init event such as routechangestart...

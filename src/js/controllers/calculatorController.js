@@ -83,6 +83,7 @@ angular.module("Transport").controller("calculatorController", function($scope, 
 		} else {
 			$scope.input.rmb = $scope.fee.firstget + (Math.ceil(n) - 1) * $scope.fee.lastget;
 		}
+		$scope.input.hkd = ($scope.input.rmb * $scope.rate.rate).toFixed(2);
 	}
 	$scope.calculate_by_business = function(n) {
 		if (n < $scope.fee.lastsend_kg) {
@@ -90,6 +91,7 @@ angular.module("Transport").controller("calculatorController", function($scope, 
 		} else {
 			$scope.input.rmb = $scope.fee.firstsend + (Math.ceil(n) - 1) * $scope.fee.lastsend;
 		}
+		$scope.input.hkd = ($scope.input.rmb * $scope.rate.rate).toFixed(2);
 	}
 	$scope.calculate_by_house = function(n) {
 		if (n < $scope.fee.lastsend_kg) {
@@ -97,5 +99,6 @@ angular.module("Transport").controller("calculatorController", function($scope, 
 		} else {
 			$scope.input.rmb = $scope.fee.firstsend + (Math.ceil(n) - 1) * $scope.fee.lastsend + $scope.fee.additionalFee;
 		}
+		$scope.input.hkd = ($scope.input.rmb * $scope.rate.rate).toFixed(2);
 	}
 })

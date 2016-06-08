@@ -1,5 +1,8 @@
 // by dribehance <dribehance.kksdapp.com>
-angular.module("Transport").controller("signinController", function($scope, $rootScope, userServices, errorServices, toastServices, localStorageService, config) {
+angular.module("Transport").controller("signinController", function($scope, $rootScope, $location, userServices, errorServices, toastServices, localStorageService, config) {
+	if ($rootScope.is_signin()) {
+		$location.path("index").replace();
+	}
 	$scope.input = {
 		telephone: "",
 		password: ""
@@ -18,11 +21,5 @@ angular.module("Transport").controller("signinController", function($scope, $roo
 				errorServices.autoHide(data.message);
 			}
 		})
-	}
-	$rootScope.is_signin = function() {
-		return localStorageService.get("token") ? true : false;
-	}
-	$rootScope.logout = function() {
-		localStorageService.remove("token");
 	}
 })

@@ -1,6 +1,6 @@
 <!-- header -->
 <dribehance-header title="'計算器'"></dribehance-header>
-<form ng-submit="ajaxForm" name="calculatorForm">
+<form ng-submit="ajaxForm" name="calculatorForm" style="padding-bottom:100px;">
     <div class="wrap has-bottom">
         重量比較輕而體積比較大的貨物,快遞公司是按體積重收費的.
         <p class="text-primary">*體積重量=長X寬X高/6000(單位cm)</p>
@@ -48,7 +48,7 @@
         <div class="col-xs-12">
             <div class="input-group">
                 <div class="input-label">運費(RMB)</div>
-                <span class="text-primary">计算结果：{{input.rmb||'0.00'}}RMB</span>
+                <span class="text-primary">计算结果：{{input.rmb||'0.00'}}RMB/{{input.hkd||"0.00"}}HKD</span>
             </div>
         </div>
     </div>
