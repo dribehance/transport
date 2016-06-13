@@ -97,7 +97,7 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 				$scope.no_more = $scope.travel_addresses.length == data.Result.AddressList.totalRow ? true : false;
 
 				angular.forEach($scope.travel_addresses, function(address) {
-					var long_address = address.province + address.city + address.country + address.address;
+					var long_address = address.link_name + "/" + address.link_telephone + "/" + address.province + "-" + address.city + "-" + address.country + "-" + address.address;
 					address["long_address"] = long_address;
 				});
 				$scope.input.travel_address = $scope.travel_addresses[0];
