@@ -16,7 +16,7 @@ angular.module("Transport").controller("signinController", function($scope, $roo
 			toastServices.hide()
 			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
 				localStorageService.set("token", data.token);
-				$rootScope.back();
+				$location.path("index").replace();
 			} else {
 				errorServices.autoHide(data.message);
 			}
