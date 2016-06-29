@@ -4,7 +4,7 @@ angular.module("Transport").factory("timeoutHttpInterceptor", function($location
 		// optional method
 		'request': function(config) {
 			// do something on success
-			config.timeout = 5000;
+			config.timeout = 8000;
 			return config;
 		},
 		// optional method
