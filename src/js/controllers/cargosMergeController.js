@@ -65,14 +65,27 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 			}
 		})
 	};
+	$scope.payments_1 = [];
+	$scope.payments_2 = [];
+	toastServices.show();
+	transportServices.query_payments().then(function(data) {
+		toastServices.hide()
+		if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
+			$scope.payments_1 = data.payments;
+			$scope.payments_2 = data.payments;
+			$scope.payments_2.unshift("貨到付款(只限自營自取點)");
+		} else {
+			errorServices.autoHide(data.message);
+		}
+	});
 	// payment
-	var payments_1 = ["支付寶轉賬", "淘寶拍下，付款", "中國銀行，轉賬", "恒生銀行，轉賬"],
-		payments_2 = ["貨到付款(只限自營自取點)", "支付寶轉賬", "淘寶拍下，付款", "中國銀行，轉賬", "恒生銀行，轉賬"];
+	// var $scope.payments_1 = ["支付寶轉賬", "淘寶拍下，付款", "中國銀行，轉賬", "恒生銀行，轉賬"],
+	// 	$scope.payments_2 = ["貨到付款(只限自營自取點)", "支付寶轉賬", "淘寶拍下，付款", "中國銀行，轉賬", "恒生銀行，轉賬"];
 	$scope.$watch("input.business_hour", function(n, o) {
 		if (n.type == "0") {
-			$scope.payments = payments_1;
+			$scope.payments = $scope.payments_1;
 		} else {
-			$scope.payments = payments_2;
+			$scope.payments = $scope.payments_2;
 		}
 		$scope.input.payment = $scope.payments[0];
 	});
@@ -164,7 +177,7 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 		}
 		$scope.$watch("input.way", function(n, o) {
 			$scope.calculate();
-			$scope.payments = payments_1;
+			$scope.payments = $scope.payments_1;
 			$scope.input.payment = $scope.payments[0];
 			$scope.business_hours = [{
 				"address_get": "",

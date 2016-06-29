@@ -90,6 +90,16 @@ angular.module("Transport").factory("transportServices", function($http, config)
 			}).then(function(data) {
 				return data.data;
 			});
+		},
+		query_payments: function(input) {
+			return $http({
+				// by dribehance <dribehance.kksdapp.com>
+				url: config.url + "/mobile/CargoManage/getCargoPayTypeList",
+				method: "GET",
+				params: angular.extend({}, config.common_params, input)
+			}).then(function(data) {
+				return data.data;
+			});
 		}
 	}
 });
