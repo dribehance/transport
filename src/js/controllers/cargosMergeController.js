@@ -72,7 +72,7 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 		toastServices.hide()
 		if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
 			$scope.payments_1 = data.payments;
-			$scope.payments_2 = data.payments;
+			$scope.payments_2 = angular.copy(data.payments);
 			$scope.payments_2.unshift("貨到付款(只限自營自取點)");
 		} else {
 			errorServices.autoHide(data.message);
