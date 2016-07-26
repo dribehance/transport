@@ -21,6 +21,92 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 		} else {
 			errorServices.autoHide(data.message);
 		}
+	}).then(function(data) {
+		// query fee 汇率
+		toastServices.show();
+		transportServices.query_calculator_constant().then(function(data) {
+			toastServices.hide()
+			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
+				$scope.rate = data.rateModel.rate;
+				$scope.fee = data.feeModel;
+			} else {
+				errorServices.autoHide(data.message);
+			}
+		}).then(function(data) {
+			// calculator
+			$scope.calculate = function() {
+				if ($scope.input.way == "self") {
+					$scope.calculate_by_self($scope.get_weight());
+					return
+				}
+				if ($scope.input.way == "travel" && $scope.input.address_type == 'business') {
+					$scope.calculate_by_business($scope.get_weight());
+					return
+				}
+				if ($scope.input.way == "travel" && $scope.input.address_type == 'house') {
+					$scope.calculate_by_house($scope.get_weight());
+					return
+				}
+			}
+			$scope.calculate_by_self = function(n) {
+				if (parseFloat(n) < parseFloat($scope.fee.lastget_kg)) {
+					$scope.input.rmb = $scope.fee.lastget_RMB;
+				} else {
+					$scope.input.rmb = parseFloat($scope.fee.firstget) + (Math.ceil(n) - 1) * parseFloat($scope.fee.lastget);
+				}
+				$scope.input.hkd = (parseFloat($scope.input.rmb) * parseFloat($scope.rate)).toFixed(2);
+			}
+			$scope.calculate_by_business = function(n) {
+				if (parseFloat(n) < parseFloat($scope.fee.lastsend_kg)) {
+					$scope.input.rmb = $scope.fee.lastsend_RMB;
+				} else {
+					$scope.input.rmb = parseFloat($scope.fee.firstsend) + (Math.ceil(n) - 1) * parseFloat($scope.fee.lastsend);
+				}
+				$scope.input.hkd = (parseFloat($scope.input.rmb) * parseFloat($scope.rate)).toFixed(2);
+			}
+			$scope.calculate_by_house = function(n) {
+				if (parseFloat(n) < parseFloat($scope.fee.lastsend_kg)) {
+					$scope.input.rmb = $scope.fee.lastsend_RMB;
+				} else {
+					$scope.input.rmb = parseFloat($scope.fee.firstsend) + (Math.ceil(n) - 1) * parseFloat($scope.fee.lastsend) + parseFloat($scope.fee.additionalFee);
+				}
+				$scope.input.hkd = (parseFloat($scope.input.rmb) * parseFloat($scope.rate)).toFixed(2);
+			}
+			$scope.$watch("input.way", function(n, o) {
+				$scope.calculate();
+				$scope.payments = $scope.payments_1;
+				$scope.input.payment = $scope.payments[0];
+				$scope.business_hours = [{
+					"address_get": "",
+					"time_get": "星期一至五上午",
+					"type": 0,
+					"post_time": "",
+					"status": 1
+				}, {
+					"address_get": "",
+					"time_get": "星期一至五下午",
+					"type": 0,
+					"post_time": "",
+					"status": 1
+				}, {
+					"address_get": "",
+					"time_get": "星期六日上午",
+					"type": 0,
+					"post_time": "",
+					"status": 1
+				}, {
+					"address_get": "",
+					"time_get": "星期六日下午",
+					"type": 0,
+					"post_time": "",
+					"status": 1
+				}];
+				$scope.input.business_hour = $scope.business_hours[0];
+			});
+			$scope.$watch("input.address_type", function(n, o) {
+				$scope.calculate();
+			})
+		});
 	})
 	$scope.get_status = function(status) {
 		return ["未收貨", "已入倉", "集運中", "貨物配送完成"][status]
@@ -125,94 +211,8 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 
 	}
 	$scope.loadMore();
-	// query fee 汇率
-	toastServices.show();
-	transportServices.query_calculator_constant().then(function(data) {
-		toastServices.hide()
-		if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
-			$scope.rate = data.rateModel.rate;
-			$scope.fee = data.feeModel;
-		} else {
-			errorServices.autoHide(data.message);
-		}
-	}).then(function(data) {
-		// calculator
-		$scope.calculate = function() {
-			if ($scope.input.way == "self") {
-				$scope.calculate_by_self($scope.get_weight());
-				return
-			}
-			if ($scope.input.way == "travel" && $scope.input.address_type == 'business') {
-				$scope.calculate_by_business($scope.get_weight());
-				return
-			}
-			if ($scope.input.way == "travel" && $scope.input.address_type == 'house') {
-				$scope.calculate_by_house($scope.get_weight());
-				return
-			}
-		}
-		$scope.calculate_by_self = function(n) {
-			if (n < $scope.fee.lastget_kg) {
-				$scope.input.rmb = $scope.fee.lastget_RMB;
-			} else {
-				$scope.input.rmb = $scope.fee.firstget + (Math.ceil(n) - 1) * $scope.fee.lastget;
-			}
-			$scope.input.hkd = ($scope.input.rmb * $scope.rate).toFixed(2);
-		}
-		$scope.calculate_by_business = function(n) {
-			if (n < $scope.fee.lastsend_kg) {
-				$scope.input.rmb = $scope.fee.lastsend_RMB;
-			} else {
-				$scope.input.rmb = $scope.fee.firstsend + (Math.ceil(n) - 1) * $scope.fee.lastsend;
-			}
-			$scope.input.hkd = ($scope.input.rmb * $scope.rate).toFixed(2);
-		}
-		$scope.calculate_by_house = function(n) {
-			if (n < $scope.fee.lastsend_kg) {
-				$scope.input.rmb = $scope.fee.lastsend_RMB;
-			} else {
-				$scope.input.rmb = $scope.fee.firstsend + (Math.ceil(n) - 1) * $scope.fee.lastsend + $scope.fee.additionalFee;
-			}
-			$scope.input.hkd = ($scope.input.rmb * $scope.rate).toFixed(2);
-		}
-		$scope.$watch("input.way", function(n, o) {
-			$scope.calculate();
-			$scope.payments = $scope.payments_1;
-			$scope.input.payment = $scope.payments[0];
-			$scope.business_hours = [{
-				"address_get": "",
-				"time_get": "星期一至五上午",
-				"type": 0,
-				"post_time": "",
-				"status": 1
-			}, {
-				"address_get": "",
-				"time_get": "星期一至五下午",
-				"type": 0,
-				"post_time": "",
-				"status": 1
-			}, {
-				"address_get": "",
-				"time_get": "星期六日上午",
-				"type": 0,
-				"post_time": "",
-				"status": 1
-			}, {
-				"address_get": "",
-				"time_get": "星期六日下午",
-				"type": 0,
-				"post_time": "",
-				"status": 1
-			}];
-			$scope.input.business_hour = $scope.business_hours[0];
-		});
-		$scope.$watch("input.address_type", function(n, o) {
-			$scope.calculate();
-		})
-	});
 	// merge action
 	$scope.merge = function() {
-		toastServices.show();
 		var jiyunType, address_type;
 		if ($scope.input.way == "self") {
 			jiyunType = 0;
@@ -226,6 +226,7 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 		if ($scope.input.way == "travel" && $scope.input.address_type == 'house') {
 			address_type = 1;
 		}
+		toastServices.show();
 		userServices.merge_cargos({
 			jiyunType: jiyunType,
 			addressType: address_type,

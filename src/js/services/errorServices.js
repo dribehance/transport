@@ -25,7 +25,7 @@ angular.module("Transport").factory("errorServices", function($rootScope, $timeo
 			switch (status) {
 				case -1:
 				case 0:
-					this.autoHide("網絡連接超時");
+					this.autoHide("網絡連接超時,请重新加载！");
 					break;
 				case 500:
 				case 501:
