@@ -111,6 +111,7 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 	$scope.get_status = function(status) {
 		return ["未收貨", "已入倉", "集運中", "貨物配送完成"][status]
 	}
+	$scope.cargos = [];
 	$scope.get_weight = function() {
 		var weight = 0;
 		angular.forEach($scope.cargos, function(cargo) {
@@ -231,10 +232,10 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 			jiyunType: jiyunType,
 			addressType: address_type,
 			ids: $routeParams.ids,
-			address: $scope.input.travel_address.long_address,
-			take_places: $scope.input.address.address_get,
-			send_time_ziqu: $scope.input.business_hour.time_get,
-			send_time_paisong: $scope.input.business_hour.time_get,
+			address: $scope.input.travel_address && $scope.input.travel_address.long_address,
+			take_places: $scope.input.address && $scope.input.address.address_get,
+			send_time_ziqu: $scope.input.business_hour && $scope.input.business_hour.time_get,
+			send_time_paisong: $scope.input.business_hour && $scope.input.business_hour.time_get,
 			pay_type: $scope.input.payment,
 			weight: $scope.get_weight(),
 			HKD: $scope.input.hkd,
