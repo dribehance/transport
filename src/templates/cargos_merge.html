@@ -10,17 +10,21 @@
             <div class="input-label">
                 集運方式<span class="text-primary text-small">( 集運方式不同，计费不用)</span>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 <label for="radio_1">
                     <input type="radio" id="radio_1" class="hide" value="self" ng-model="input.way"><i class="fa fa-circle-o" ng-class="{'text-primary':input.way == 'self' }"></i> 自取</label>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 <label for="radio_2">
                     <input type="radio" id="radio_2" class="hide" value="travel" ng-model="input.way"><i class="fa fa-circle-o" ng-class="{'text-primary':input.way == 'travel' }"></i>送貨上門 </label>
             </div>
+            <div class="col-xs-4">
+                <label for="radio_3">
+                    <input type="radio" id="radio_3" class="hide" value="SF" ng-model="input.way"><i class="fa fa-circle-o" ng-class="{'text-primary':input.way == 'SF' }"></i>順豐自取柜 </label>
+            </div>
         </div>
     </div>
-    <div class="list-group-item" ng-if="input.way =='self'">
+    <div class="list-group-item" ng-if="input.way =='self' || input.way =='SF'">
         <div class="input-group clearfix">
             <div class="input-label">
                 自取地點
@@ -59,12 +63,28 @@
             <select name="" id="" class="form-control full-width" ng-model="input.travel_address" ng-options="travel_address.long_address for travel_address in travel_addresses"></select>
         </div>
     </div>
-    <div class="list-group-item">
+    <div class="list-group-item" ng-if="input.way != 'SF'">
         <div class="input-group clearfix">
             <div class="input-label">
                 營業時間<span class="text-primary text-small">( 時段選擇，方便寄送)</span>
             </div>
             <select name="" id="" class="form-control full-width" ng-model="input.business_hour" ng-options="business_hour.time_get for business_hour in business_hours"></select>
+        </div>
+    </div>
+    <div class="list-group-item" ng-if="input.way == 'SF'">
+        <div class="input-group clearfix">
+            <div class="input-label">
+                營業時間<span class="text-primary text-small">( 時段選擇，方便寄送)</span>
+            </div>
+            <select name="" id="" class="form-control full-width" ng-model="input.business_hour" ng-options="business_hour.time for business_hour in business_hours"></select>
+        </div>
+    </div>
+    <div class="list-group-item" ng-if="input.payment == '積分付款'">
+        <div class="input-group clearfix">
+            <div class="input-label">
+                餘額支付<span class="text-primary text-small"></span>
+            </div>
+            <input type="password" class="form-control full-width" ng-model="input.password" name="password" placeholder="請輸入登錄密碼">
         </div>
     </div>
     <!-- <div class="list-group-item">

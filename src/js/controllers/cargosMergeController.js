@@ -47,8 +47,26 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 					$scope.calculate_by_house($scope.get_weight());
 					return
 				}
+				if ($scope.input.way == "SF") {
+					$scope.calculate_by_SF($scope.get_weight());
+					return
+				}
 			}
 			$scope.calculate_by_self = function(n) {
+				// self address
+				toastServices.show();
+				transportServices.query_self_address({
+					type: 0
+				}).then(function(data) {
+					toastServices.hide()
+					if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
+						$scope.addresses = data.AddressList;
+						$scope.input.address = $scope.addresses[0];
+						$scope.query_business_hour();
+					} else {
+						errorServices.autoHide(data.message);
+					}
+				});
 				if (parseFloat(n) < parseFloat($scope.fee.lastget_kg)) {
 					$scope.input.rmb = $scope.fee.lastget_RMB;
 				} else {
@@ -65,6 +83,26 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 				$scope.input.hkd = (parseFloat($scope.input.rmb) * parseFloat($scope.rate)).toFixed(2);
 			}
 			$scope.calculate_by_house = function(n) {
+				if (parseFloat(n) < parseFloat($scope.fee.lastsend_kg)) {
+					$scope.input.rmb = $scope.fee.lastsend_RMB;
+				} else {
+					$scope.input.rmb = parseFloat($scope.fee.firstsend) + (Math.ceil(n) - 1) * parseFloat($scope.fee.lastsend) + parseFloat($scope.fee.additionalFee);
+				}
+				$scope.input.hkd = (parseFloat($scope.input.rmb) * parseFloat($scope.rate)).toFixed(2);
+			}
+			$scope.calculate_by_SF = function(n) {
+				// 地址根据重量变化，获取地址列表
+				userServices.query_sf_address({
+					weight: $scope.get_weight(),
+				}).then(function(data) {
+					if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
+						$scope.addresses = data.PickUpAddressList;
+						$scope.input.address = $scope.addresses[0];
+						$scope.query_business_hour();
+					} else {
+						errorServices.autoHide(data.message);
+					}
+				});
 				if (parseFloat(n) < parseFloat($scope.fee.lastsend_kg)) {
 					$scope.input.rmb = $scope.fee.lastsend_RMB;
 				} else {
@@ -139,9 +177,14 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 	});
 	// query business hour
 	$scope.query_business_hour = function() {
+		var jiyuan_type = 1;
+		if ($scope.input.way == "SF") {
+			jiyuan_type = 2;
+		}
 		// business hour
 		transportServices.query_business_hour({
-			take_places: $scope.input.address.address_get
+			take_places: $scope.input.address.address_get,
+			jiyuan_type: jiyuan_type
 		}).then(function(data) {
 			toastServices.hide()
 			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {
@@ -227,6 +270,23 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 		if ($scope.input.way == "travel" && $scope.input.address_type == 'house') {
 			address_type = 1;
 		}
+		if ($scope.input.way == "SF") {
+			address_type = 0;
+		}
+		// console.log({
+		// 	jiyunType: jiyunType,
+		// 	addressType: address_type,
+		// 	ids: $routeParams.ids,
+		// 	address: $scope.input.travel_address && $scope.input.travel_address.long_address,
+		// 	take_places: $scope.input.address && $scope.input.address.address_get,
+		// 	send_time_ziqu: $scope.input.business_hour && ($scope.input.business_hour.time_get || $scope.input.business_hour.time),
+		// 	send_time_paisong: $scope.input.business_hour && ($scope.input.business_hour.time_get || $scope.input.business_hour.time),
+		// 	pay_type: $scope.input.payment,
+		// 	weight: $scope.get_weight(),
+		// 	HKD: $scope.input.hkd,
+		// 	RMB: $scope.input.rmb
+		// })
+		// return;
 		toastServices.show();
 		userServices.merge_cargos({
 			jiyunType: jiyunType,
@@ -234,12 +294,13 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 			ids: $routeParams.ids,
 			address: $scope.input.travel_address && $scope.input.travel_address.long_address,
 			take_places: $scope.input.address && $scope.input.address.address_get,
-			send_time_ziqu: $scope.input.business_hour && $scope.input.business_hour.time_get,
-			send_time_paisong: $scope.input.business_hour && $scope.input.business_hour.time_get,
+			send_time_ziqu: $scope.input.business_hour && ($scope.input.business_hour.time_get || $scope.input.business_hour.time),
+			send_time_paisong: $scope.input.business_hour && ($scope.input.business_hour.time_get || $scope.input.business_hour.time),
 			pay_type: $scope.input.payment,
 			weight: $scope.get_weight(),
 			HKD: $scope.input.hkd,
-			RMB: $scope.input.rmb
+			RMB: $scope.input.rmb,
+			password: $scope.input.password
 		}).then(function(data) {
 			toastServices.hide()
 			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {

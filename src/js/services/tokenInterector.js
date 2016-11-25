@@ -1,9 +1,15 @@
 // by dribehance <dribehance.kksdapp.com>
-angular.module("Transport").factory("tokenInterceptor", function($location, $q, localStorageService, errorServices, config) {
+angular.module("Transport").factory("tokenInterceptor", function($location, $q, localStorageService, md5Services, errorServices, config) {
 	return {
 		// optional method
 		'request': function(config) {
 			// do something on success
+			// intercept .html static resource
+			if (config.url.indexOf(".html") > 0) {
+				return config;
+			}
+			var encrypt_params = md5Services.encrypt(config.params);
+			config.params.app_sign = encrypt_params;
 			return config;
 		},
 		// optional method

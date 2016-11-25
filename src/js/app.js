@@ -4,6 +4,7 @@ angular.module("Transport", [
 		"ngSanitize",
 		// "mobile-angular-ui",
 		// "mobile-angular-ui.core",
+		"angular-md5",
 		"LocalStorageModule",
 		// "flow",
 		// "timer"

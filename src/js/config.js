@@ -1,6 +1,6 @@
 angular.module("Transport").constant("config", {
-	url: "http://www.bibicargo.com",
-	imageUrl: "http://www.bibicargo.com/files/image?name=",
+	url: "http://120.76.41.192:8055",
+	imageUrl: "http://120.76.41.192:8055/files/image?name=",
 	request: {
 		"SUCCESS": "200",
 		"TOKEN_INVALID": "405"

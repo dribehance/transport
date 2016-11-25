@@ -1,5 +1,5 @@
 // by dribehance <dribehance.kksdapp.com>
-angular.module("Transport").factory("transportServices", function($http, config) {
+angular.module("Transport").factory("transportServices", function($http, localStorageService, config) {
 	return {
 		query_contact: function(input) {
 			return $http({
@@ -96,7 +96,9 @@ angular.module("Transport").factory("transportServices", function($http, config)
 				// by dribehance <dribehance.kksdapp.com>
 				url: config.url + "/mobile/CargoManage/getCargoPayTypeList",
 				method: "GET",
-				params: angular.extend({}, config.common_params, input)
+				params: angular.extend({}, config.common_params, {
+					token: localStorageService.get("token")
+				}, input)
 			}).then(function(data) {
 				return data.data;
 			});
