@@ -37,7 +37,7 @@ angular.module("Transport").factory("errorServices", function($rootScope, $timeo
 				case 507:
 				case 509:
 				case 510:
-					this.autoHide("服務器連接出錯");
+				this.autoHide("服務器網絡連接超時,请重新加载！");
 					break;
 				default:
 					;

@@ -29,7 +29,7 @@ angular.module("Transport").controller("ordersController", function($scope, $rou
 				$scope.orders = $scope.orders.concat(data.Result.Cargos.list);
 				$scope.no_more = $scope.orders.length == data.Result.Cargos.totalRow ? true : false;
 			} else {
-				errorServices.autoHide("服务器错误");
+				errorServices.autoHide("服務器網絡連接超時,请重新加载！");
 			}
 			if ($scope.no_more) {
 				$scope.page.message = "加載完成，共" + $scope.orders.length + "件訂單";

@@ -13,7 +13,7 @@ angular.module("Transport").controller("cargoController", function($scope, userS
 			express_number: $scope.input.number,
 			express_company: $scope.input.company,
 			item_content: $scope.input.tag,
-			remarks: $scope.remarks
+			remarks: $scope.input.remarks
 		}).then(function(data) {
 			toastServices.hide()
 			if (data.code == config.request.SUCCESS && data.status == config.response.SUCCESS) {

@@ -41,6 +41,7 @@ angular.module("Transport", [
 		localStorageServiceProvider.setStorageCookie(1 / 50);
 		$httpProvider.interceptors.push('tokenInterceptor');
 		$httpProvider.interceptors.push('timeoutHttpInterceptor');
+		$httpProvider.interceptors.push('md5Interceptor');
 
 	}).run(function(appServices) {
 		// init event such as routechangestart...

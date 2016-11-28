@@ -19,7 +19,7 @@ angular.module("Transport").controller("addressController", function($scope, $ro
 				$scope.addresses = $scope.addresses.concat(data.Result.AddressList.list);
 				$scope.no_more = $scope.addresses.length == data.Result.AddressList.totalRow ? true : false;
 			} else {
-				errorServices.autoHide("服务器错误");
+				errorServices.autoHide("服務器網絡連接超時,请重新加载！");
 			}
 			if ($scope.no_more) {
 				$scope.page.message = "";

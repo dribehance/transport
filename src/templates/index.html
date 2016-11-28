@@ -3,8 +3,14 @@
     <imageview data-rate="1101/382" ng-repeat="banner in banners" src="staticImageUrl+banner.cover" on-repeat-done alt=""></imageview>
 </banner>
 <div class="wrap" ng-if="is_signin()">
-     當前登錄會員編號：{{user.id}}&nbsp;&nbsp;&nbsp;&nbsp;{{user.nickname}} </br>
-     賬戶餘額：{{user.balance_money||"0"}}HKD
+     <div class="text-center">
+         當前登錄會員編號：{{user.id}}&nbsp;&nbsp;&nbsp;&nbsp;{{user.nickname}}
+     </div>
+     <div class="text-center">賬戶餘額：{{user.balance_money||"0"}}HKD</div>
+     <div class="text-center">
+         <a ng-href="#/charge" class="btn btn-success" style="width: 85px">充值</a>
+         <a ng-href="#/bills" class="btn btn-warning" style="width: 85px">资金流水</a>
+     </div>
 </div>
 <div class="grid">
     <a ng-href="#/infos" class="grid-item">

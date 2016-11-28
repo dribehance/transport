@@ -75,6 +75,32 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 				$scope.input.hkd = (parseFloat($scope.input.rmb) * parseFloat($scope.rate)).toFixed(2);
 			}
 			$scope.calculate_by_business = function(n) {
+				$scope.business_hours = [{
+					"address_get": "",
+					"time_get": "星期一至五上午",
+					"type": 0,
+					"post_time": "",
+					"status": 1
+				}, {
+					"address_get": "",
+					"time_get": "星期一至五下午",
+					"type": 0,
+					"post_time": "",
+					"status": 1
+				}, {
+					"address_get": "",
+					"time_get": "星期六日上午",
+					"type": 0,
+					"post_time": "",
+					"status": 1
+				}, {
+					"address_get": "",
+					"time_get": "星期六日下午",
+					"type": 0,
+					"post_time": "",
+					"status": 1
+				}];
+				$scope.input.business_hour = $scope.business_hours[0];
 				if (parseFloat(n) < parseFloat($scope.fee.lastsend_kg)) {
 					$scope.input.rmb = $scope.fee.lastsend_RMB;
 				} else {
@@ -83,6 +109,32 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 				$scope.input.hkd = (parseFloat($scope.input.rmb) * parseFloat($scope.rate)).toFixed(2);
 			}
 			$scope.calculate_by_house = function(n) {
+				$scope.business_hours = [{
+					"address_get": "",
+					"time_get": "星期一至五上午",
+					"type": 0,
+					"post_time": "",
+					"status": 1
+				}, {
+					"address_get": "",
+					"time_get": "星期一至五下午",
+					"type": 0,
+					"post_time": "",
+					"status": 1
+				}, {
+					"address_get": "",
+					"time_get": "星期六日上午",
+					"type": 0,
+					"post_time": "",
+					"status": 1
+				}, {
+					"address_get": "",
+					"time_get": "星期六日下午",
+					"type": 0,
+					"post_time": "",
+					"status": 1
+				}];
+				$scope.input.business_hour = $scope.business_hours[0];
 				if (parseFloat(n) < parseFloat($scope.fee.lastsend_kg)) {
 					$scope.input.rmb = $scope.fee.lastsend_RMB;
 				} else {
@@ -114,32 +166,6 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 				$scope.calculate();
 				$scope.payments = $scope.payments_1;
 				$scope.input.payment = $scope.payments[0];
-				$scope.business_hours = [{
-					"address_get": "",
-					"time_get": "星期一至五上午",
-					"type": 0,
-					"post_time": "",
-					"status": 1
-				}, {
-					"address_get": "",
-					"time_get": "星期一至五下午",
-					"type": 0,
-					"post_time": "",
-					"status": 1
-				}, {
-					"address_get": "",
-					"time_get": "星期六日上午",
-					"type": 0,
-					"post_time": "",
-					"status": 1
-				}, {
-					"address_get": "",
-					"time_get": "星期六日下午",
-					"type": 0,
-					"post_time": "",
-					"status": 1
-				}];
-				$scope.input.business_hour = $scope.business_hours[0];
 			});
 			$scope.$watch("input.address_type", function(n, o) {
 				$scope.calculate();
@@ -177,6 +203,8 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 	});
 	// query business hour
 	$scope.query_business_hour = function() {
+		$scope.business_hours = [];
+		$scope.input.business_hour = "";
 		var jiyuan_type = 1;
 		if ($scope.input.way == "SF") {
 			jiyuan_type = 2;
@@ -214,7 +242,8 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 	$scope.$watch("input.business_hour", function(n, o) {
 		if (n.type == "0") {
 			$scope.payments = $scope.payments_1;
-		} else {
+		}
+		if (n.type == "1" && $scope.input.way == "self") {
 			$scope.payments = $scope.payments_2;
 		}
 		$scope.input.payment = $scope.payments[0];
@@ -245,7 +274,7 @@ angular.module("Transport").controller("cargosMergeController", function($scope,
 				});
 				$scope.input.travel_address = $scope.travel_addresses[0];
 			} else {
-				errorServices.autoHide("服务器错误");
+				errorServices.autoHide("服務器網絡連接超時,请重新加载！");
 			}
 			if ($scope.no_more) {
 				$scope.page.message = "没有了";

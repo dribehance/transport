@@ -1,0 +1,20 @@
+<!-- header -->
+<dribehance-header title="'充值記錄'"></dribehance-header>
+<div class="list-group">
+    <div class="list-group-item" ng-repeat="record in records">
+        <div class="cargo-item">
+            <div class="cargo-header clearfix">
+                交易時間：{{record.post_time}}
+            </div>
+            <div class="cargo-content">
+                <p class="text-success">
+                    入賬金額(HKD)：{{record.bmoney|currency:""}}
+                </p>
+                <p class="clearfix" style="margin-bottom:0px">充值方式：南洋商業銀行
+                </p>
+                <p>狀態：{{get_status(record.type)}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="btn full-width" ng-click="loadMore()">{{page.message}}</div>
+</div>

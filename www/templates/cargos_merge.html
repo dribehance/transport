@@ -19,12 +19,12 @@
                     <input type="radio" id="radio_2" class="hide" value="travel" ng-model="input.way"><i class="fa fa-circle-o" ng-class="{'text-primary':input.way == 'travel' }"></i>送貨上門 </label>
             </div>
             <div class="col-xs-4">
-                <label for="radio_3">
-                    <input type="radio" id="radio_3" class="hide" value="SF" ng-model="input.way"><i class="fa fa-circle-o" ng-class="{'text-primary':input.way == 'SF' }"></i>順豐自取柜 </label>
+                <label for="radio_5">
+                    <input type="radio" id="radio_5" class="hide" value="SF" ng-model="input.way"><i class="fa fa-circle-o" ng-class="{'text-primary':input.way == 'SF' }"></i>順豐自取柜 </label>
             </div>
         </div>
     </div>
-    <div class="list-group-item" ng-if="input.way =='self' || input.way =='SF'">
+    <div class="list-group-item" ng-if="(input.way =='self' || input.way =='SF') && addresses.length>0">
         <div class="input-group clearfix">
             <div class="input-label">
                 自取地點
@@ -71,7 +71,7 @@
             <select name="" id="" class="form-control full-width" ng-model="input.business_hour" ng-options="business_hour.time_get for business_hour in business_hours"></select>
         </div>
     </div>
-    <div class="list-group-item" ng-if="input.way == 'SF'">
+    <div class="list-group-item" ng-if="input.way == 'SF' && business_hours.length>0">
         <div class="input-group clearfix">
             <div class="input-label">
                 營業時間<span class="text-primary text-small">( 時段選擇，方便寄送)</span>

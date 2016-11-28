@@ -1,0 +1,28 @@
+<!-- header -->
+<dribehance-header title="'充值'"></dribehance-header>
+<div class="wrap">
+    <form ng-submit="ajaxForm()" name="chargeForm">
+        <div class="input-group">
+            <div class="input-label">
+                公司銀行名稱<span class="text-primary text-small"></span>
+            </div>
+            Highway Technology Limited
+        </div>
+        <div class="input-group">
+            <div class="input-label">
+                充值方式<span class="text-primary text-small">(官方指定南洋商業銀行)</span>
+            </div>
+            <select class="form-control full-width text-small" ng-model="input.bank_type" ng-options="bank_type for bank_type in bank_types"></select>
+        </div>
+        <div class="input-group">
+            <div class="input-label">
+                充值金額(RMB)<span class="text-primary text-small"></span>
+            </div>
+            <input type="tel" class="form-control full-width" ng-model="input.rmb" name="charge_rmb" required placeholder="請輸入充值金額(數字)">
+        </div>
+        
+        <p class="text-center">
+            <button class="btn btn-primary full-width" type="submit" ng-disabled="chargeForm.$invalid">充值</button>
+        </p>
+    </form>
+</div>

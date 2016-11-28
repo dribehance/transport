@@ -123,6 +123,30 @@ angular.module("Transport").factory("userServices", function($http, localStorage
 				return data.data;
 			});
 		},
+		charge_balance: function(input) {
+			return $http({
+				// by dribehance <dribehance.kksdapp.com>
+				url: config.url + "/mobile/CargoManage/addFlowMoney",
+				method: "GET",
+				params: angular.extend({}, config.common_params, {
+					token: localStorageService.get("token")
+				}, input)
+			}).then(function(data) {
+				return data.data;
+			});
+		},
+		query_charge_balance_records: function(input) {
+			return $http({
+				// by dribehance <dribehance.kksdapp.com>
+				url: config.url + "/mobile/CargoManage/flowingMoneyList",
+				method: "GET",
+				params: angular.extend({}, config.common_params, {
+					token: localStorageService.get("token")
+				}, input)
+			}).then(function(data) {
+				return data.data;
+			});
+		},
 		query_charge_records: function(input) {
 			return $http({
 				// by dribehance <dribehance.kksdapp.com>
